@@ -1,0 +1,11 @@
+<div *ngIf="event">
+    <h2>{{event.headliner | uppercase}} Details</h2>
+    <div>id: {{event.id}}</div>
+    <div>
+      <label for="headliner">Headliner: </label>
+      <input id="headliner" [(ngModel)]="event.headliner" placeholder="headliner">
+    </div>
+    <button type="button" (click)="goBack()">go back</button>
+
+    <button type="button" (click)="save()">save</button>
+</div>
