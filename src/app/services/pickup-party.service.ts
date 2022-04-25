@@ -13,7 +13,7 @@ export class PickupPartyService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  private apiURL = 'http://localhost:3000';  // URL to web api
+  private apiURL = 'https://blooming-fortress-13049.herokuapp.com';  // URL to web api
   private pickupPartiesURL = `${this.apiURL}/pickup_parties`
 
 /**
