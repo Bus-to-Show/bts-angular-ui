@@ -16,5 +16,6 @@ export interface Event {
     external?: string;
     createdAt?: string;
     updatedAt?: string;
-    parties?: PickupParty[];
+    capacity?: number;
+    locationName?: string;
   }
