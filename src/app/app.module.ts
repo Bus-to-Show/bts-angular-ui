@@ -23,6 +23,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { PickupPartyComponent } from './pickup-party/pickup-party.component';
+import {MatInputModule} from '@angular/material/input';
+
+
+
 
 
 
@@ -35,7 +41,8 @@ import {MatCardModule} from '@angular/material/card';
     DashboardComponent,
     EventSearchComponent,
     EventsTableComponent,
-    NavBarComponent
+    NavBarComponent,
+    PickupPartyComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +62,9 @@ import {MatCardModule} from '@angular/material/card';
     MatIconModule,
     MatListModule,
     MatCardModule,
+    MatProgressBarModule,
+    MatInputModule,
+  
 
   ],
   providers: [],

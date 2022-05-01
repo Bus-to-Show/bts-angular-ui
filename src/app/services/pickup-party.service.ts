@@ -16,7 +16,7 @@ export class PickupPartyService {
   private apiURL = 'http://localhost:3000';  // URL to web api
   //private apiURL = 'https://blooming-fortress-13049.herokuapp.com';  // URL to web api
 
-  private pickupPartiesURL = `${this.apiURL}/pickup_parties`
+  private managePartiesURL = `${this.apiURL}/manage-parties`
 
 /**
  * Handle Http operation that failed.
@@ -45,13 +45,22 @@ export class PickupPartyService {
 
   }
 
-  getPickupParties(eventId?: number): Observable<any> {
-    const body = {eventId: eventId}
-    const url = `${this.pickupPartiesURL}/findParties`;
-    return this.http.patch(url, body, this.httpOptions).pipe(
+  // getPickupParties(eventId?: number): Observable<any> {
+  //   const body = {eventId: eventId}
+  //   const url = `${this.pickupPartiesURL}/findParties`;
+  //   return this.http.patch(url, body, this.httpOptions).pipe(
+  //     //tap(x => this.storedEvents.next(x)),
+  //     catchError(this.handleError<any>('getPickupParties'))
+  //   );
+  // }
+
+  getPickupParties(eventId?: number): Observable<[]> {
+    // const events = of(EVENTS);
+    // return events;
+    return this.http.get<[]>(`${this.managePartiesURL}/${eventId}`)
+    .pipe(
       //tap(x => this.storedEvents.next(x)),
-      catchError(this.handleError<any>('getPickupParties'))
+      catchError(this.handleError<[]>('getEvents', []))
     );
   }
-
 }

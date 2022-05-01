@@ -1,6 +1,16 @@
-<h1>{{title}}</h1>
-    <nav>
-    <a routerLink="/dashboard">Dashboard</a>
-    <a routerLink="/events">Events</a>
-    </nav>
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+    <span>{{title}}</span>
+    <span class="example-spacer"></span>
+    <button mat-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" routerLink="/events">
+        Events
+    </button>
+    <button mat-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/dashboard">
+        Dashboard
+    </button>
+ </mat-toolbar>
+   
 <router-outlet></router-outlet>

@@ -9,17 +9,13 @@
         <button type="button" (click)="goBack()">go back</button>
         <button  type="button" (click)="save()">save</button>
     </div>
-
+    
     <div class="container">
+        <app-pickup-party *ngFor="let pickup of pickups" [pickup]="pickup">
 
-        <mat-card *ngFor="let pickup of pickups" class="example-card">
-            <mat-card-title>{{pickup.lastBusDepartureTime| uppercase}} </mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-            <mat-card-content>
-            </mat-card-content>
-            <mat-card-actions>
-            
-            </mat-card-actions>
-    </mat-card>
+        </app-pickup-party>
+
+        
     </div>
 </div>
+

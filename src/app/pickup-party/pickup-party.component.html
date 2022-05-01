@@ -1,0 +1,32 @@
+<mat-card  *ngIf="pickup" class="example-card">
+    <mat-card-title class="city">{{pickup.city | uppercase}}<mat-icon> departure_board</mat-icon>
+    </mat-card-title>
+    <mat-card-content> {{pickup.locationName.substring(pickup.locationName.indexOf('-') + 1, pickup.locationName.length)| uppercase}}  </mat-card-content>
+    
+    <mat-card-subtitle>
+        Last Call: {{pickup.lastBusDepartureTime}} 
+    </mat-card-subtitle>
+    <mat-card-content> RESERVATIONS</mat-card-content>
+    <div *ngIf="!displayCapacityForm else capacityForm">
+        <mat-card-title class="res" (click)="toggleCapacityForm('show')">{{pickup.reservations}} / {{pickup.capacity}} <mat-icon> edit</mat-icon></mat-card-title>
+        <mat-card-actions>
+            <button mat-raised-button>CHECK-IN</button>
+            <button mat-raised-button>STOP</button>
+        </mat-card-actions>
+        <mat-card-footer>
+            <mat-progress-bar mode="determinate" color="#ff420f" [value]="pickup.reservations"></mat-progress-bar>
+        </mat-card-footer>
+    </div>
+    <ng-template #capacityForm>
+        <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Edit Capacity</mat-label>
+              <input matInput placeholder="pickup.capacity" (value)="pickup.capacity">
+            </mat-form-field>
+          </form>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="toggleCapacityForm('hide')">CANCEL</button>
+            <button mat-raised-button color="warn">SUBMIT</button>
+        </mat-card-actions>
+    </ng-template>
+</mat-card>
