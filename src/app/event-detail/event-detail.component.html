@@ -1,11 +1,25 @@
-<div *ngIf="event">
-    <h2>{{event.headliner | uppercase}} Details</h2>
-    <div>id: {{event.id}}</div>
-    <div>
-      <label for="headliner">Headliner: </label>
-      <input id="headliner" [(ngModel)]="event.headliner" placeholder="headliner">
-    </div>
-    <button type="button" (click)="goBack()">go back</button>
+<div *ngIf="event" class="" >
+    <div class="container">
 
-    <button type="button" (click)="save()">save</button>
+        <div>id: {{event.id}}</div>
+        <div>
+          <label for="headliner">Headliner: </label>
+          <input id="headliner" [(ngModel)]="event.headliner" placeholder="headliner">
+        </div>
+        <button type="button" (click)="goBack()">go back</button>
+        <button  type="button" (click)="save()">save</button>
+    </div>
+
+    <div class="container">
+
+        <mat-card *ngFor="let pickup of pickups" class="example-card">
+            <mat-card-title>{{pickup.lastBusDepartureTime| uppercase}} </mat-card-title>
+            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+            <mat-card-content>
+            </mat-card-content>
+            <mat-card-actions>
+            
+            </mat-card-actions>
+    </mat-card>
+    </div>
 </div>

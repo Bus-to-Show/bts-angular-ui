@@ -1,0 +1,19 @@
+.container-page {
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.example-card {
+    width: 200px;
+    height: 400px;
+    padding: 20px;
+    margin: 20px;
+    border-style: solid;
+    border-color: #ff420f;
+    border-radius: 10px;
+    border-width: 1px;
+  }
