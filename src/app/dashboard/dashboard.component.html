@@ -40,12 +40,5 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/detail/{{row.id}}"></tr>
         </table>
     </div>
-      
-      <div class="events-menu">
-      <a *ngFor="let event of filteredEvents"
-      routerLink="/detail/{{event.id}}">
-        {{event.date}} {{event.headliner}}
-      </a>
-    </div>
 </div>
 

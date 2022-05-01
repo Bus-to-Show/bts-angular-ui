@@ -63,4 +63,13 @@ export class PickupPartyService {
       catchError(this.handleError<[]>('getEvents', []))
     );
   }
+
+  updateCapacity(pickupId: number, capacity: number): Observable<any> {
+      const body = {capacity: capacity}
+      const url = `${this.managePartiesURL}/${pickupId}`;
+      return this.http.patch(url, body, this.httpOptions).pipe(
+        //tap(x => this.storedEvents.next(x)),
+        catchError(this.handleError<any>('getPickupParties'))
+      );
+    }
 }

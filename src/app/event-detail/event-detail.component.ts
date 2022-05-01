@@ -16,6 +16,7 @@ export class EventDetailComponent implements OnInit {
   @Input() event?: Event;
   eventId: number;
   pickups: PickupParty[] = [];
+  addMode: boolean = false;
   constructor(
     private eventService: EventService,
     private pickupPartyService: PickupPartyService,
@@ -30,7 +31,7 @@ export class EventDetailComponent implements OnInit {
     this.eventId = Number(this.route.snapshot.paramMap.get('id'))
     this.getEvent();
     this.getPickups();
-
+    this.addMode = false;
 
   }
 
@@ -50,6 +51,10 @@ export class EventDetailComponent implements OnInit {
   }
   goBack(): void {
     this.location.back();
+  }
+
+  toggleAddMode(){
+    this.addMode = !this.addMode;
   }
 
   save(): void {

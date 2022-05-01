@@ -9,13 +9,31 @@
         <button type="button" (click)="goBack()">go back</button>
         <button  type="button" (click)="save()">save</button>
     </div>
-    
-    <div class="container">
-        <app-pickup-party *ngFor="let pickup of pickups" [pickup]="pickup">
-
-        </app-pickup-party>
-
-        
+    <div class="button-container">
+        <button class="add-party" mat-fab color="accent" aria-label="Example icon button with a home icon" (click)="toggleAddMode()">
+                <mat-icon >add</mat-icon>
+         </button>
     </div>
+    <div *ngIf="!addMode else addPartiesMode">
+        <div class="button-container">
+            <button class="add-party" mat-fab color="accent" aria-label="Example icon button with a home icon" (click)="toggleAddMode()">
+                    <mat-icon >add</mat-icon>
+             </button>
+        </div>
+        <div class="container">
+            <app-pickup-party *ngFor="let pickup of pickups" [pickup]="pickup">
+            </app-pickup-party>
+        </div>
+    </div>
+    <ng-template #addPartiesMode>
+        <div class="button-container">
+            <button class="cancel-add" mat-fab aria-label="Example icon button with a home icon" (click)="toggleAddMode()">
+                    X
+             </button>
+        </div>
+        <app-add-parties>
+
+        </app-add-parties>
+    </ng-template>
 </div>
 

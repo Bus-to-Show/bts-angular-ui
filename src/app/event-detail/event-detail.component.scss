@@ -9,3 +9,30 @@
     flex-wrap: wrap;
     
 }
+
+.button-container {
+    display: flex;
+    position: absolute;
+    right: 0;
+    margin-right: 40px;
+}
+
+.add-party {
+
+ background: linear-gradient(white, #dee0f5); 
+ border-style: solid;
+ border-color: #ff420f;
+ color: #ff420f;
+ border-width: 1px;
+
+}
+
+.cancel-add {
+
+    background: #ff420f; 
+    border-style: solid;
+    border-color: linear-gradient(white, #dee0f5);
+    color: linear-gradient(white, #dee0f5);
+    border-width: 2px;
+   
+   }

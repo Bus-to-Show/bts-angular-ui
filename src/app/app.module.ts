@@ -26,6 +26,11 @@ import {MatCardModule} from '@angular/material/card';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { PickupPartyComponent } from './pickup-party/pickup-party.component';
 import {MatInputModule} from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { AddPartiesComponent } from './add-parties/add-parties.component';
+
+
 
 
 
@@ -42,7 +47,8 @@ import {MatInputModule} from '@angular/material/input';
     EventSearchComponent,
     EventsTableComponent,
     NavBarComponent,
-    PickupPartyComponent
+    PickupPartyComponent,
+    AddPartiesComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +70,8 @@ import {MatInputModule} from '@angular/material/input';
     MatCardModule,
     MatProgressBarModule,
     MatInputModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
   
 
   ],
