@@ -55,8 +55,6 @@ export class PickupPartyService {
   // }
 
   getPickupParties(eventId?: number): Observable<[]> {
-    // const events = of(EVENTS);
-    // return events;
     return this.http.get<[]>(`${this.managePartiesURL}/${eventId}`)
     .pipe(
       //tap(x => this.storedEvents.next(x)),

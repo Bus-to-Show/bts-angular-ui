@@ -11,6 +11,7 @@ import { PickupParty } from '../types/pickup-parties';
 })
 export class AddPartiesComponent implements OnInit {
   @Input() possiblePickups!: PickupParty[];
+  @Input() eventId!: number;
   @ViewChild(MatTable) partiesTable!: MatTable<any>;
 
   displayedColumns = ['name', 'city', 'firstBusLoadTime', 'lastBusDepartureTime', 'price', 'reservations', 'capacity', 'created', 'edit'];
@@ -33,7 +34,6 @@ export class AddPartiesComponent implements OnInit {
   ngOnInit(): void {
     this.filterPickups(this.locationTypes.value)
     this.locationTypes.valueChanges.subscribe(changes => {
-      console.log('changes!!11 ', changes)
       if(changes.all === true){
         this.locationTypes.setValue({primary: true, late: true, early: true, all: true})
       }
@@ -54,7 +54,6 @@ export class AddPartiesComponent implements OnInit {
   }
 
   editParty(source: 'edit' | 'add', party: PickupParty){
-    console.log(' what did we get???? ' , party)
     this.editMode = party.location_id
     this.partyBackupCopy = {...party}
   }
@@ -67,12 +66,27 @@ export class AddPartiesComponent implements OnInit {
   }
 
   submitEditedParty(party: PickupParty){
+    this.editMode = -1
     console.log('party ====> ', party)
-
     this.pickupPartyService.upsertParty(party).subscribe(partyRes => {
       console.log('partyRes ====> ', partyRes)
-    })
+      this.refreshParties()
+      this.editMode = 0;
+    },
+    err => {
+      this.cancelEdit()
+      console.log('HTTP Error', err)
+    },
+    
+    )
+  }
 
+  refreshParties(){
+    this.pickupPartyService.getPickupParties(this.eventId).subscribe((pickups: PickupParty[]) => {
+      this.possiblePickups = pickups.filter(party => party.type === 'standard')
+      this.partiesTable.renderRows()
+
+    })
   }
 
 }

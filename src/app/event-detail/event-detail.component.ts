@@ -45,10 +45,11 @@ export class EventDetailComponent implements OnInit {
   }
 
   getPickups(): void {
-    this.pickupPartyService.getPickupParties(39369177).subscribe((pickups: PickupParty[]) => {
+    this.pickupPartyService.getPickupParties(this.eventId).subscribe((pickups: PickupParty[]) => {
       console.log(' [[[[[[pickups]]]]]] ', pickups)
       this.possiblePickups = pickups.filter(party => party.type === 'standard')
       this.createdPickups = this.possiblePickups.filter(party =>party.created === true)
+      if (this.createdPickups.length >= 0) this.addMode = true
       console.log(' [[[[[[pickups]]]]]] ', pickups)
       console.log(' [[[[[[possible]]]]]] ', this.possiblePickups)
 
@@ -60,7 +61,9 @@ export class EventDetailComponent implements OnInit {
   }
 
   toggleAddMode(){
-    this.addMode = !this.addMode;
+    if (this.createdPickups.length >= 0) this.addMode = true
+    else this.addMode = !this.addMode;
+
   }
 
   save(): void {

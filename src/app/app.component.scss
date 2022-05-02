@@ -2,6 +2,10 @@
     flex: 1 1 auto;
   }
 
+  body{
+      margin:0;
+
+    }
 
   button {
       margin-right: 30px;
@@ -14,5 +18,6 @@
         margin-bottom: 20px;
         height: 80px;
         background: linear-gradient(white, #dee0f5);
+        width: 100%;
 
   }
