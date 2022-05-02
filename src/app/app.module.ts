@@ -29,6 +29,10 @@ import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AddPartiesComponent } from './add-parties/add-parties.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
+
+
 
 
 
@@ -72,7 +76,8 @@ import { AddPartiesComponent } from './add-parties/add-parties.component';
     MatInputModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-  
+    MatCheckboxModule,
+    MatDialogModule,
 
   ],
   providers: [],

@@ -19,9 +19,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getEvents()
   }
-  //filteredEvents: Event[] = []
+
   displayedColumns = ['date', 'headliner', 'support1', 'venue', 'reservations', 'capacity'];
-  dataSource: Event[] = [];
   searchTerm: string = ''
 
   get filteredEvents(): Event[]{
@@ -30,36 +29,23 @@ export class DashboardComponent implements OnInit {
         || event.support1?.toUpperCase().includes(this.searchTerm)
         || event.support2?.toUpperCase().includes(this.searchTerm)
         || this.searchTerm.split(' ').every(element => event.venue.toUpperCase().split(' ').includes(element.trim()))
-    })
+    });
   } 
 
   // Push a search term into the observable stream.
   search(term: string): Event[] {
-    this.searchTerm = term.toUpperCase().trim()
-    return this.filteredEvents
-    // this.filteredEvents = this.upcomingEvents.filter(event => {
-    //   return event.headliner.includes(term)
-    // })
-
+    this.searchTerm = term.toUpperCase().trim();
+    return this.filteredEvents;
   }
+
   getEvents(): void {
     this.eventService.getEvents().subscribe(events => {  
-      console.log(' here we go here we go ', events)
-      this.upcomingEvents = events.filter(e => new Date(e.date) >= new Date() ? true : false).sort(function(a,b){
+      this.upcomingEvents = events
+      .filter(e => new Date(e.date) >= new Date() ? true : false).sort(function(a,b){
         // Turn your strings into dates, and then subtract them
         // to get a value that is either negative, positive, or zero.
         return new Date(a.date).getTime() - new Date(b.date).getTime();
       });
-
-      // for (let i = 0; i < 64; i++){
-      //   this.pickupPartiesService.getPickupParties(this.upcomingEvents[i].id).subscribe(parties => {
-      //     this.upcomingEvents[i].parties = parties;
-      //   })
-      // }
-      //this.filteredEvents = this.upcomingEvents;
-      //this.dataSource = this.filteredEvents;
-      //console.log('this.upcomingEvents ', this.upcomingEvents)
-      //this.upcomingEvents = events.slice(0, 5)
     })
   } 
 }

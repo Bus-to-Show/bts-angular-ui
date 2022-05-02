@@ -15,8 +15,9 @@ export class EventDetailComponent implements OnInit {
 
   @Input() event?: Event;
   eventId: number;
-  pickups: PickupParty[] = [];
+  possiblePickups: PickupParty[] = [];
   addMode: boolean = false;
+  createdPickups: PickupParty[] = []
   constructor(
     private eventService: EventService,
     private pickupPartyService: PickupPartyService,
@@ -44,9 +45,14 @@ export class EventDetailComponent implements OnInit {
   }
 
   getPickups(): void {
-    this.pickupPartyService.getPickupParties(39369177).subscribe(pickups => {
-      this.pickups = pickups
-      console.log(' these parties ::::  ', this.pickups)
+    this.pickupPartyService.getPickupParties(39369177).subscribe((pickups: PickupParty[]) => {
+      console.log(' [[[[[[pickups]]]]]] ', pickups)
+      this.possiblePickups = pickups.filter(party => party.type === 'standard')
+      this.createdPickups = this.possiblePickups.filter(party =>party.created === true)
+      console.log(' [[[[[[pickups]]]]]] ', pickups)
+      console.log(' [[[[[[possible]]]]]] ', this.possiblePickups)
+
+
     })
   }
   goBack(): void {

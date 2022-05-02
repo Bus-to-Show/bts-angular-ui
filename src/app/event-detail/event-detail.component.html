@@ -1,27 +1,27 @@
 <div *ngIf="event" class="" >
     <div class="container">
+        <button mat-button type="button" (click)="goBack()">go back</button>
+        <button  type="button" (click)="save()">save</button>
 
         <div>id: {{event.id}}</div>
         <div>
           <label for="headliner">Headliner: </label>
           <input id="headliner" [(ngModel)]="event.headliner" placeholder="headliner">
         </div>
-        <button type="button" (click)="goBack()">go back</button>
-        <button  type="button" (click)="save()">save</button>
     </div>
     <div class="button-container">
         <button class="add-party" mat-fab color="accent" aria-label="Example icon button with a home icon" (click)="toggleAddMode()">
                 <mat-icon >add</mat-icon>
          </button>
     </div>
-    <div *ngIf="!addMode else addPartiesMode">
+    <div *ngIf="false else addPartiesMode">
         <div class="button-container">
             <button class="add-party" mat-fab color="accent" aria-label="Example icon button with a home icon" (click)="toggleAddMode()">
                     <mat-icon >add</mat-icon>
              </button>
         </div>
         <div class="container">
-            <app-pickup-party *ngFor="let pickup of pickups" [pickup]="pickup">
+            <app-pickup-party *ngFor="let pickup of createdPickups" [pickup]="pickup">
             </app-pickup-party>
         </div>
     </div>
@@ -31,7 +31,9 @@
                     X
              </button>
         </div>
-        <app-add-parties>
+        <app-add-parties
+            [possiblePickups]="possiblePickups"
+        >
 
         </app-add-parties>
     </ng-template>

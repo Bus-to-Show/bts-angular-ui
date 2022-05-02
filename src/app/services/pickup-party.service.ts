@@ -60,7 +60,7 @@ export class PickupPartyService {
     return this.http.get<[]>(`${this.managePartiesURL}/${eventId}`)
     .pipe(
       //tap(x => this.storedEvents.next(x)),
-      catchError(this.handleError<[]>('getEvents', []))
+      catchError(this.handleError<[]>('getManageParties', []))
     );
   }
 
@@ -71,5 +71,11 @@ export class PickupPartyService {
         //tap(x => this.storedEvents.next(x)),
         catchError(this.handleError<any>('getPickupParties'))
       );
-    }
+  }
+
+  upsertParty(party: PickupParty) {
+    console.log('party in upsert in service!!!!! ', party)
+    const url = `${this.managePartiesURL}/${party.party_id}`;
+    return this.http.put(url, party, this.httpOptions)
+  }
 }

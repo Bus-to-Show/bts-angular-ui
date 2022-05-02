@@ -1,7 +1,8 @@
 export interface PickupParty {
     id?: number;
+    party_id: number;
     eventId?: number;
-    pickupLocationId: number;
+    location_id: number;
     capacity?: string;
     firstBusLoadTime?: string;
     inCart?: number;
@@ -10,4 +11,6 @@ export interface PickupParty {
     partyPrice?: number;
     reservations?: string;
     city?: string;
+    created?: boolean | null;
+    type?: string;
   }
