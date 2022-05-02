@@ -49,7 +49,7 @@ export class EventDetailComponent implements OnInit {
       console.log(' [[[[[[pickups]]]]]] ', pickups)
       this.possiblePickups = pickups.filter(party => party.type === 'standard')
       this.createdPickups = this.possiblePickups.filter(party =>party.created === true)
-      if (this.createdPickups.length >= 0) this.addMode = true
+      if (this.createdPickups.length <= 0) this.addMode = true
       console.log(' [[[[[[pickups]]]]]] ', pickups)
       console.log(' [[[[[[possible]]]]]] ', this.possiblePickups)
 
@@ -61,7 +61,7 @@ export class EventDetailComponent implements OnInit {
   }
 
   toggleAddMode(){
-    if (this.createdPickups.length >= 0) this.addMode = true
+    if (this.createdPickups.length <= 0) this.addMode = true
     else this.addMode = !this.addMode;
 
   }

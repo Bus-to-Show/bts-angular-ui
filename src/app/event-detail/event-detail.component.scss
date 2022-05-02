@@ -36,3 +36,37 @@
     border-width: 2px;
    
    }
+
+.row-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-around;
+    background: none; //linear-gradient(#dee0f5, white); 
+    // width: 400px;
+    // border-radius: 10px;
+    // padding-top: 12px;
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: #ff420f;
+
+
+}
+
+.row-container .event-info {
+
+}
+
+.row-element{
+    color: #ff420f;
+}
+
+.back-button {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ff420f;
+    float: right;
+    margin-right: 20px;
+}
+

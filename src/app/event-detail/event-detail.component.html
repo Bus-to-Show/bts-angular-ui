@@ -1,10 +1,20 @@
 <div *ngIf="event" class="" >
-    <div class="container">
-        <button mat-button type="button" (click)="goBack()">go back</button>
-        <div>id: {{event.id}}</div>
-        <div>
-          <label for="headliner">Headliner: </label>
-          <input id="headliner" [(ngModel)]="event.headliner" placeholder="headliner">
+    <button  class="back-button" mat-button type="button" (click)="goBack()">go back</button>
+    <div class="container event-info">
+        <div class="row-container">
+            <div>id: {{event!.id}}</div>
+            <h3 class="">{{event!.date}}</h3>
+    
+            <h1 class="row-element">{{event!.headliner}}</h1>
+            <h3 class="">{{event!.venue}}</h3>
+    
+        </div>
+        <div *ngIf="false" >
+            <div>id: {{event!.id}}</div>
+            <div>
+              <label for="headliner">Headliner: </label>
+              <input id="headliner" [(ngModel)]="event!.headliner" placeholder="headliner">
+            </div>
         </div>
     </div>
     <div class="button-container">

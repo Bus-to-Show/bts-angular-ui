@@ -12,10 +12,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./pickup-party.component.scss']
 })
 export class PickupPartyComponent implements OnInit {
-  @Input() pickup?: PickupParty;
+  @Input() pickup!: PickupParty;
+  backupPickup!: PickupParty;
   displayCapacityForm: boolean = false;
-  capacity = new FormControl('');
-
 
   constructor(
     private pickupPartyService: PickupPartyService,
@@ -28,23 +27,25 @@ export class PickupPartyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.backupPickup = {...this.pickup}
+
     
   }
 
 
   toggleCapacityForm(showOrHide: 'show' | 'hide'){
    if(showOrHide === 'show') this.displayCapacityForm = true;
-   if(showOrHide === 'hide') this.displayCapacityForm = false;
+   if(showOrHide === 'hide') {
+     this.displayCapacityForm = false;
+     this.pickup = {...this.backupPickup};
+    }
   }
 
   updateCapacity(){
-    this.pickupPartyService.updateCapacity(this.pickup?.id || 0, this.capacity.value).subscribe(res => {
-      console.log('capacity change Response !', res)
-      this.capacity.setValue(res[0].capacity)
-      this.toggleCapacityForm('hide');
-      this.openSnackBar(`capacity updated to ${this.capacity.value}`, 'close')
+    this.pickupPartyService.updateCapacity(this.pickup.party_id || 0, Number(this.pickup.capacity) || 0).subscribe(res => {
+      this.displayCapacityForm = false;
+      this.openSnackBar(`capacity updated to ${this.pickup.capacity}`, 'close')
     })
-    console.log(' did capacity change>>>??? ', this.capacity.value)
     
 
   }

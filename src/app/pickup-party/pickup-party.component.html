@@ -25,7 +25,7 @@
         <form class="example-form">
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>Edit Capacity</mat-label>
-              <input id="capacity" type="number" matInput placeholder="pickup.capacity" (value)="pickup.capacity"  [formControl]="capacity">
+              <input name="capacity" id="capacity" type="number" matInput placeholder="pickup.capacity"  [(ngModel)]="pickup.capacity">
             </mat-form-field>
           </form>
           <mat-card-actions>

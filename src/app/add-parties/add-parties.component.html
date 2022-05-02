@@ -1,6 +1,6 @@
 <div>
     <section class="checkbox-section" [formGroup]="locationTypes">
-        <h4>Filter by Location Type:</h4>
+        <h4>Filter by Location Type: (coming soon)</h4>
         <mat-checkbox formControlName="primary">Primary</mat-checkbox>
         <mat-checkbox formControlName="late">Late</mat-checkbox>
         <mat-checkbox formControlName="early">Early</mat-checkbox>
@@ -8,7 +8,7 @@
 
       </section>
       
-      <section class="checkbox-section" >
+      <section  *ngIf="false"  class="checkbox-section" >
         <h4>You chose:</h4>
         {{locationTypes.value | json}}
       </section>
