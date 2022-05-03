@@ -4,6 +4,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { PickupParty } from '../types/pickup-parties';
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,7 @@ export class PickupPartyService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  private apiURL = 'http://localhost:3000';  // URL to web api
-  //private apiURL = 'https://blooming-fortress-13049.herokuapp.com';  // URL to web api
-
+  private apiURL = process.env['API_URL'] || environment.API_URL;
   private managePartiesURL = `${this.apiURL}/manage-parties`
 
 /**

@@ -4,6 +4,7 @@ import { EVENTS } from '../types/mock-events'
 import { Observable, of, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -13,8 +14,7 @@ export class EventService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  private apiURL = 'http://localhost:3000';  // URL to web api
-//  private apiURL = 'https://blooming-fortress-13049.herokuapp.com';  // URL to web api
+  private apiURL = process.env['API_URL'] || environment.API_URL;
   private eventsURL = `${this.apiURL}/events-dash`
 
  // console.log('process.env --------------> ', process.env)
