@@ -14,7 +14,7 @@ export class EventService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  private apiURL = process.env['API_URL'] || environment.API_URL;
+  private apiURL = environment.API_URL;
   private eventsURL = `${this.apiURL}/events-dash`
 
  // console.log('process.env --------------> ', process.env)

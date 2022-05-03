@@ -14,7 +14,7 @@ export class PickupPartyService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  private apiURL = process.env['API_URL'] || environment.API_URL;
+  private apiURL = environment.API_URL;
   private managePartiesURL = `${this.apiURL}/manage-parties`
 
 /**
