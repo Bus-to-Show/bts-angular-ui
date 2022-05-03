@@ -16,6 +16,14 @@
                 <th mat-header-cell *matHeaderCellDef> Headliner </th>
                 <td mat-cell *matCellDef="let event"> {{event.headliner}} </td>
             </ng-container>
+            <ng-container matColumnDef="doors">
+                <th mat-header-cell *matHeaderCellDef> Doors </th>
+                <td mat-cell *matCellDef="let event"> {{event.doors_time}} </td>
+            </ng-container>
+            <ng-container matColumnDef="start">
+                <th mat-header-cell *matHeaderCellDef> START </th>
+                <td mat-cell *matCellDef="let event"> {{event.startTime}} </td>
+            </ng-container>
             <ng-container matColumnDef="support1">
                 <th mat-header-cell *matHeaderCellDef> With </th>
                 <td mat-cell *matCellDef="let event"> {{event.support1}} </td>

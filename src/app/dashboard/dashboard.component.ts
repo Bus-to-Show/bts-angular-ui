@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
     this.getEvents()
   }
 
-  displayedColumns = ['date', 'headliner', 'support1', 'venue', 'reservations', 'capacity'];
+  displayedColumns = ['date', 'doors', 'start', 'headliner', 'support1', 'venue', 'reservations', 'capacity'];
   searchTerm: string = ''
 
   get filteredEvents(): Event[]{
@@ -46,6 +46,8 @@ export class DashboardComponent implements OnInit {
         // to get a value that is either negative, positive, or zero.
         return new Date(a.date).getTime() - new Date(b.date).getTime();
       });
+      console.log('So Many this.upcoming ',this.upcomingEvents)
+
     })
   } 
 }

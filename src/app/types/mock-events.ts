@@ -55,7 +55,7 @@ export const EVENTS: Event[] = [
 {
         id: 4,
         date: '2023-01-04',
-        startTime: '',
+        startTime: '00:00',
         venue: 'Red Rocks',
         headliner: 'Dr. Dog',
         support1: '',

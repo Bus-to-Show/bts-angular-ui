@@ -1,8 +1,10 @@
+import { Time } from "@angular/common";
 import { PickupParty } from "./pickup-parties";
 
 export interface Event {
     id?: number;
     date: string;
+    doors_time?: string;
     startTime?: string;
     venue: string;
     headliner: string;
