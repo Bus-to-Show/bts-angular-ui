@@ -12,7 +12,7 @@
         <mat-card-content> RESERVATIONS</mat-card-content>
         <mat-card-title class="res" (click)="toggleCapacityForm('show')">{{pickup.reservations}} / {{pickup.capacity}} <mat-icon> edit</mat-icon></mat-card-title>
         <mat-card-actions>
-            <button mat-raised-button>CHECK-IN</button>
+            <button mat-raised-button routerLink="/check-in/{{pickup.party_id}}">CHECK-IN</button>
             <button mat-raised-button>MANAGE</button>
         </mat-card-actions>
         <mat-card-footer>

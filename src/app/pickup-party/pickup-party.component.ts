@@ -3,6 +3,7 @@ import { PickupParty } from '../types/pickup-parties';
 import { FormControl } from '@angular/forms';
 import { PickupPartyService } from '../services/pickup-party.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { debug } from 'console';
 
 
 
@@ -15,6 +16,7 @@ export class PickupPartyComponent implements OnInit {
   @Input() pickup!: PickupParty;
   backupPickup!: PickupParty;
   displayCapacityForm: boolean = false;
+  checkInMode: boolean = false;
 
   constructor(
     private pickupPartyService: PickupPartyService,
@@ -28,7 +30,7 @@ export class PickupPartyComponent implements OnInit {
 
   ngOnInit(): void {
     this.backupPickup = {...this.pickup}
-
+    console.log('what is it ========= >', this.pickup)
     
   }
 
@@ -46,7 +48,11 @@ export class PickupPartyComponent implements OnInit {
       this.displayCapacityForm = false;
       this.openSnackBar(`capacity updated to ${this.pickup.capacity}`, 'close')
     })
-    
 
+    
+  }
+
+  toggleCheckIn(){
+    this.checkInMode= true;
   }
 }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Event } from '../types/event'
 import { Observable, of, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';

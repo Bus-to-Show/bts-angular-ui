@@ -31,14 +31,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AddPartiesComponent } from './add-parties/add-parties.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
-
-
-
-
-
-
-
-
+import { PartyCheckInComponent } from './party-check-in/party-check-in.component';
+import { ReservationComponent } from './reservation/reservation.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
@@ -52,7 +47,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     EventsTableComponent,
     NavBarComponent,
     PickupPartyComponent,
-    AddPartiesComponent
+    AddPartiesComponent,
+    PartyCheckInComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,
@@ -78,6 +75,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSnackBarModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatSlideToggleModule
 
   ],
   providers: [],
