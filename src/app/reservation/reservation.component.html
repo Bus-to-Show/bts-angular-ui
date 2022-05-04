@@ -1,0 +1,16 @@
+<mat-card class="reservation-container">
+    <div class="reservation-name">
+       <h3> {{reservation.willCallFirstName }}</h3>
+    </div> 
+    <div class="reservation-name">
+        <h3> {{reservation.willCallLastName}},</h3>
+    </div>
+    <mat-slide-toggle
+        class="slider"
+        [checked]="reservation.status===2"
+        [disabled]="reservation.status==3"
+        (change)="updateReservationStatus($event)"
+        >
+        
+    </mat-slide-toggle>
+</mat-card>
