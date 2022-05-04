@@ -50,11 +50,11 @@ export class ReservationsService {
     );
   }
 
-  updateStatus(reervationId: number, checkedIn: boolean): Observable<any>{
+  updateStatus(reservationId: number, checkedIn: boolean): Observable<any>{
 
     const checkedInStaus = checkedIn ? 2 : 1;
     const body = {status: checkedInStaus}
-      const url = `${this.manageReservationsURL}/${reervationId}`;
+      const url = `${this.manageReservationsURL}/${reservationId}`;
       return this.http.patch(url, body, this.httpOptions).pipe(
         //tap(x => this.storedEvents.next(x)),
         catchError(this.handleError<any>('getPickupParties'))
