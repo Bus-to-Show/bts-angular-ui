@@ -50,14 +50,30 @@ export class ReservationsService {
     );
   }
 
-  updateStatus(reservationId: number, checkedIn: boolean): Observable<any>{
-
-    const checkedInStaus = checkedIn ? 2 : 1;
-    const body = {status: checkedInStaus}
+  updateStatus(reservationId: number, checkedIn: boolean | 'CANCEL' | 'UNCANCEL'): Observable<any>{
+    let checkedInStatus: any
+    if (checkedIn === true){
+      checkedInStatus = 2 
+    } else if (checkedIn === false){
+      checkedInStatus = 1
+    } else if (checkedIn === 'CANCEL'){
+      checkedInStatus = 3
+    } else if (checkedIn === 'UNCANCEL'){
+      checkedInStatus = 1
+    }
+    const body = {status: checkedInStatus}
       const url = `${this.manageReservationsURL}/${reservationId}`;
       return this.http.patch(url, body, this.httpOptions).pipe(
         //tap(x => this.storedEvents.next(x)),
         catchError(this.handleError<any>('getPickupParties'))
+    );
+  }
+
+  getOrders(partyId: number): Observable<[]> {
+    return this.http.get<[]>(`${this.manageReservationsURL}/orders-by-party/${partyId}`)
+    .pipe(
+      //tap(x => this.storedEvents.next(x)),
+      catchError(this.handleError<[]>('getManageParties', []))
     );
   }
 }

@@ -1,10 +1,11 @@
-<p>party-check-in works!</p>
-Party Id: {{partyId}}
+<p>MANAGEMENT</p>
+Party Id: {{partyId}} 
 <button class="back-button" mat-stroked-button  (click)="goBack()">go back</button>
 <div>
     <app-reservation 
         *ngFor="let reservation of reservations"
         [reservation]="reservation"
+        parent="management"
     >
     
     </app-reservation>

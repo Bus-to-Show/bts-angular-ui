@@ -14,6 +14,7 @@ import { debug } from 'console';
 })
 export class PickupPartyComponent implements OnInit {
   @Input() pickup!: PickupParty;
+  @Input() event!: Event;
   backupPickup!: PickupParty;
   displayCapacityForm: boolean = false;
   checkInMode: boolean = false;
@@ -29,9 +30,7 @@ export class PickupPartyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.backupPickup = {...this.pickup}
-    console.log('what is it ========= >', this.pickup)
-    
+    this.backupPickup = {...this.pickup}    
   }
 
 

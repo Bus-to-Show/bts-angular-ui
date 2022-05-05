@@ -22,20 +22,17 @@ export class PartyManagementComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log('does anything happen?')
     this.partyId = Number(this.route.snapshot.paramMap.get('id'))
-    this.reservationsService.getReservations(100).subscribe(reservations => {
-      this.reservations = reservations
-      this.refreshReservations()
-      console.log('weeeehaaaa! reservations ====> ', reservations)
+    this.reservationsService.getOrders(this.partyId).subscribe(orders => {
+      this.reservations = orders
+      //this.refreshReservations()
     }); 
   }
   
   refreshReservations(){
     setInterval(()=> {
-      this.reservationsService.getReservations(100).subscribe(reservations => {
-        this.reservations = reservations
-        console.log('weeeehaaaa! reservations ====> ', reservations)
+      this.reservationsService.getOrders(this.partyId).subscribe(orders => {
+        this.reservations = orders
       }); 
     }, 20000); 
   }

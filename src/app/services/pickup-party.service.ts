@@ -70,7 +70,6 @@ export class PickupPartyService {
   }
 
   upsertParty(party: PickupParty) {
-    console.log('party in upsert in service!!!!! ', party)
     const url = `${this.managePartiesURL}/${party.party_id}`;
     return this.http.put(url, party, this.httpOptions)
   }

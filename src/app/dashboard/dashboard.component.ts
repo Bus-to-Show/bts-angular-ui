@@ -46,7 +46,6 @@ export class DashboardComponent implements OnInit {
         // to get a value that is either negative, positive, or zero.
         return new Date(a.date).getTime() - new Date(b.date).getTime();
       });
-      console.log('So Many this.upcoming ',this.upcomingEvents)
 
     })
   } 

@@ -67,9 +67,7 @@ export class AddPartiesComponent implements OnInit {
 
   submitEditedParty(party: PickupParty){
     this.editMode = -1
-    console.log('party ====> ', party)
     this.pickupPartyService.upsertParty(party).subscribe(partyRes => {
-      console.log('partyRes ====> ', partyRes)
       this.refreshParties()
       this.editMode = 0;
     },

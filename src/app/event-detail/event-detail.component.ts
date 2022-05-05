@@ -46,13 +46,9 @@ export class EventDetailComponent implements OnInit {
 
   getPickups(): void {
     this.pickupPartyService.getPickupParties(this.eventId).subscribe((pickups: PickupParty[]) => {
-      console.log(' [[[[[[pickups]]]]]] ', pickups)
       this.possiblePickups = pickups.filter(party => party.type === 'standard')
       this.createdPickups = this.possiblePickups.filter(party =>party.created === true)
-      if (this.createdPickups.length <= 0) this.addMode = true
-      console.log(' [[[[[[pickups]]]]]] ', pickups)
-      console.log(' [[[[[[possible]]]]]] ', this.possiblePickups)
-
+      if (this.createdPickups.length <= 0) this.addMode = true;
 
     })
   }
