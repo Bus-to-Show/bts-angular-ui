@@ -34,6 +34,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { PartyCheckInComponent } from './party-check-in/party-check-in.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { PartyManagementComponent } from './party-management/party-management.component';
 
 
 
@@ -49,7 +50,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     PickupPartyComponent,
     AddPartiesComponent,
     PartyCheckInComponent,
-    ReservationComponent
+    ReservationComponent,
+    PartyManagementComponent
   ],
   imports: [
     BrowserModule,

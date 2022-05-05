@@ -22,20 +22,21 @@ reservations: [] = []
 
     }
 
-  ngOnInit(): void {
-    this.partyId = Number(this.route.snapshot.paramMap.get('id'))
-    this.refreshReservations()
-    
-    }
-   
-  refreshReservations(){
-    setInterval(()=> {
-      this.reservationsService.getReservations(this.partyId).subscribe( reservations => {
+    ngOnInit(): void {
+      this.partyId = Number(this.route.snapshot.paramMap.get('id'))
+      this.reservationsService.getReservations(this.partyId).subscribe(reservations => {
         this.reservations = reservations
-        console.log('woooohooooo! reservations ====> ', reservations)
+        this.refreshReservations()
       }); 
-    }, 20000); 
-  }
+    }
+    
+    refreshReservations(){
+      setInterval(()=> {
+        this.reservationsService.getReservations(this.partyId).subscribe(reservations => {
+          this.reservations = reservations
+        }); 
+      }, 20000); 
+    }
    
   
   goBack(): void {
