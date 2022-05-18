@@ -2,8 +2,14 @@
 Party Id: {{partyId}} 
 <button class="back-button" mat-stroked-button  (click)="goBack()">go back</button>
 <div>
+    <div id="search-component">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="search-box">Search</mat-label>
+            <input matInput #searchBox id="search-box" (input)="search(searchBox.value)">
+        </mat-form-field>
+    </div>
     <app-reservation 
-        *ngFor="let reservation of reservations"
+        *ngFor="let reservation of filteredReservations"
         [reservation]="reservation"
         parent="management"
     >
