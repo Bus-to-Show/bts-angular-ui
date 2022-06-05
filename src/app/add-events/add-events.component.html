@@ -1,0 +1,49 @@
+<div>
+    <div class="add-event-form">
+        <label for="new-headliner">Headliner: </label>
+        <input id="new-headliner" #eventHeadliner required />
+        <label for="new-support1">Support 1: </label>
+        <input id="new-support1" #eventSupport1 />
+        <label for="new-support2">Support 2: </label>
+        <input id="new-support2" #eventSupport2/>
+        <label for="new-support2">Support 3: </label>
+        <input id="new-support2" #eventSupport3/>
+        <label for="new-venue">Venue: </label>
+        <input id="new-venue" #eventVenue placeholder="" required />
+        <label for="new-date">Date: </label>
+        <input id="new-date" #eventDate placeholder="" required />
+        <label for="new-doors">Doors Time: </label>
+        <input id="new-doors" #eventDoors placeholder="" />
+        <label for="new-start">Start Time: </label>
+        <input id="new-start" #eventStart placeholder="" />
+    </div>
+
+    <div class="button-container">
+
+        <!-- (click) passes input value to add() and then clears the input -->
+        <button type="button" class="add-button" (click)="add({
+            date: eventDate.value,
+            venue: eventVenue.value,
+            headliner: eventHeadliner.value,
+            support1: eventSupport1.value,
+            support2: eventSupport2.value,
+            support3: eventSupport3.value,
+            doors_time: eventDoors.value,
+            startTime: eventStart.value
+    
+        });
+        eventDate.value ='';
+        eventVenue.value='';
+        eventHeadliner.value='';
+        eventVenue.value='';
+        eventSupport1.value='';
+        eventSupport2.value='';
+        eventSupport3.value='';
+        eventDoors.value='';
+        eventStart.value=''
+        "
+        >
+          Submit Event
+        </button>
+    </div>
+  </div>
