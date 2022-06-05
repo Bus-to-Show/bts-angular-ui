@@ -4,7 +4,28 @@
     <div id="search-component">
         <label for="search-box">Event Search</label>
         <input #searchBox id="search-box" (input)="search(searchBox.value)" />
-    
+    </div>
+    <div>
+        <div *ngIf="!addMode else addEventsMode">
+            <div class="button-container">
+                <button class="add-party" mat-fab color="accent" aria-label="Example icon button with a home icon" (click)="toggleAddMode()">
+                        <mat-icon >add</mat-icon>
+                 </button>
+            </div>
+        </div>
+        <div>
+            <ng-template #addEventsMode>
+                <div class="button-container">
+                    <button class="cancel-add" mat-fab aria-label="Example icon button with a home icon" (click)="toggleAddMode()">
+                            X
+                     </button>
+                </div>
+                <app-add-events
+                >
+        
+                </app-add-events>
+            </ng-template>
+        </div>
     </div>
     <div class="mat-elevation-z8">
         <table mat-table class="full-width-table" [dataSource]="filteredEvents">

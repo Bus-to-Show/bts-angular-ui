@@ -11,6 +11,7 @@ import { PickupPartyService } from '../services/pickup-party.service';
 export class DashboardComponent implements OnInit {
   upcomingEvents: Event[] = [];
   allEvents: Event [] = [];
+  addMode: boolean  = false;
   constructor(
     private eventService: EventService,
     private pickupPartiesService: PickupPartyService
@@ -49,4 +50,8 @@ export class DashboardComponent implements OnInit {
 
     })
   } 
+
+  toggleAddMode(){
+    this.addMode = !this.addMode;
+  }
 }
