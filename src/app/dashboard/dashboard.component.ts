@@ -42,7 +42,8 @@ export class DashboardComponent implements OnInit {
   getEvents(): void {
     this.eventService.getEvents().subscribe(events => {  
       this.upcomingEvents = events
-      .filter(e => new Date(e.date) >= new Date() ? true : false).sort(function(a,b){
+      //.filter(e => new Date(e.date) >= new Date() ? true : false)
+      .sort(function(a,b){
         // Turn your strings into dates, and then subtract them
         // to get a value that is either negative, positive, or zero.
         return new Date(a.date).getTime() - new Date(b.date).getTime();
