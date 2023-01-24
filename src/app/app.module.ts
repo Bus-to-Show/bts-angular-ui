@@ -36,6 +36,8 @@ import { ReservationComponent } from './reservation/reservation.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { PartyManagementComponent } from './party-management/party-management.component';
 import { AddEventsComponent } from './add-events/add-events.component';
+import { AdminComponent } from './admin/admin.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -53,7 +55,9 @@ import { AddEventsComponent } from './add-events/add-events.component';
     PartyCheckInComponent,
     ReservationComponent,
     PartyManagementComponent,
-    AddEventsComponent
+    AddEventsComponent,
+    AdminComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

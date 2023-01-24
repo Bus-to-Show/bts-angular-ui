@@ -1,7 +1,4 @@
 <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-    </button>
     <span class="example-spacer"></span>
     <span>{{title}}</span>
     <span class="example-spacer"></span>
@@ -11,6 +8,21 @@
     <button mat-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/dashboard">
         Dashboard
     </button>
- </mat-toolbar>
-   
-<router-outlet></router-outlet>
+</mat-toolbar>
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <mat-nav-list>
+            <a mat-list-item href="#">Link 1</a>
+            <a mat-list-item href="#">Link 2</a>
+            <a mat-list-item href="#">Link 3</a>
+          </mat-nav-list>
+    </mat-drawer>
+
+
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <router-outlet></router-outlet>
+
+</mat-drawer-container>
