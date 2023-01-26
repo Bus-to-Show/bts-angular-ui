@@ -10,4 +10,5 @@ import { environment } from './../environments/environment';
 })
 export class AppComponent {
   title = environment.title;
+  user = false;
 }

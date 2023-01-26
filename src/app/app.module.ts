@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EventSearchComponent } from './event-search/event-search.component';
 import { EventsTableComponent } from './events-table/events-table.component';
 import { MatTableModule } from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -38,8 +39,8 @@ import { PartyManagementComponent } from './party-management/party-management.co
 import { AddEventsComponent } from './add-events/add-events.component';
 import { AdminComponent } from './admin/admin.component';
 import { RegisterComponent } from './register/register.component';
-
-
+import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -57,17 +58,19 @@ import { RegisterComponent } from './register/register.component';
     PartyManagementComponent,
     AddEventsComponent,
     AdminComponent,
-    RegisterComponent
+    RegisterComponent,
+    AuthComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSliderModule,
-    
     FormsModule,
     HttpClientModule,
     MatTableModule,
+    MatTabsModule,
     MatPaginatorModule,
     MatSortModule,
     LayoutModule,
