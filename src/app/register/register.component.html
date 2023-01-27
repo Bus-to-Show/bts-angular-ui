@@ -1,0 +1,43 @@
+<mat-card>
+    <form [formGroup]="form" (ngSubmit)="register()">
+    <mat-form-field>
+      <input matInput placeholder="First Name" formControlName="firstName">
+      <mat-error *ngIf="firstName && firstName.invalid && (firstName.dirty || firstName.touched)">
+        Please enter your first name
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Last Name" formControlName="lastName">
+        <mat-error *ngIf="lastName && lastName.invalid && (lastName.dirty || lastName.touched)">
+          Please enter your last name
+        </mat-error>
+      </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email" type="email">
+      <mat-error *ngIf="email && email.invalid && (email.dirty || email.touched)">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Password" formControlName="password" type="password">
+      <mat-error *ngIf="password && password.invalid && (password.dirty || password.touched)">
+        Please enter a password
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Confirm Password" formControlName="confirmPassword" type="password">
+      <mat-error *ngIf="confirmPassword && confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+        Please confirm your password
+      </mat-error>
+      <mat-error *ngIf="false">
+        Passwords do not match
+      </mat-error>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit">Register</button>
+  </form>
+</mat-card>
+  
