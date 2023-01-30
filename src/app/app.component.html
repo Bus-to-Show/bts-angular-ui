@@ -1,4 +1,4 @@
-<div *ngIf="!user; else loggedIn">
+<div *ngIf="!isUserLoggedIn; else loggedIn">
     <app-auth></app-auth>
 </div>
 <ng-template #loggedIn>

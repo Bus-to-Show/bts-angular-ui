@@ -13,6 +13,12 @@ import { AuthService, User } from '../services/auth.service';
 export class RegisterComponent implements OnInit {
   form: FormGroup;
 
+  get firstName() { return this.form.value.firstName; }
+  get lastName() { return this.form.value.lastName; }
+  get email() { return this.form.value.email; }
+  get password() { return this.form.value.password; }
+  get confirmPassword() { return this.form.value.confirmPassword; }
+
   constructor(private router: Router,
     private authenticationService: AuthService
     ) {
@@ -29,11 +35,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get firstName() { return this.form.value.firstName; }
-  get lastName() { return this.form.value.lastName; }
-  get email() { return this.form.value.email; }
-  get password() { return this.form.value.password; }
-  get confirmPassword() { return this.form.value.confirmPassword; }
+
+  //add logic to check for matching passwords
 
   checkPasswords(form: FormGroup) {
     
@@ -57,10 +60,19 @@ export class RegisterComponent implements OnInit {
       
       // Perform registration logic here, such as calling a REST API to create the user account
       // If the registration is successful, navigate to the login page
-      this.authenticationService.register(user).subscribe(()=> {
-        console.log('authentication response is back!')
-      })
-      this.router.navigate(['/login']);
+      this.authenticationService.register(user)
+      
+    //   .subscribe((res: any)=> {
+    //     console.log('authentication response is back!', res)
+    //     this.router.navigate(['/detail/40300431']);
+
+    //   /*
+     
+     
+    
+    //     */
+
+    //   })
     }
   }
 }
