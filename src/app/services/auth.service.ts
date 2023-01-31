@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { sha256 } from 'js-sha256';
 import { environment } from '../../environments/environment'
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { ThisReceiver } from '@angular/compiler';
 
 
 export enum AccessLevel {
@@ -25,6 +26,7 @@ export interface User {
   isDriver?: boolean;
   isStaff?:boolean;
   isWaiverSigned?: boolean;
+  token?: string;
 
 
 }
@@ -38,30 +40,50 @@ export interface User {
 export class AuthService {
   currentUser?: User | null;
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+    })
   };
   private apiURL = environment.API_URL;
   private authURL = `${this.apiURL}/users`
+  private authTokenUrl= `${this.apiURL}/api/secure`
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+  ) {
+    this.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    })
+  }
 
   private currentUserSubject = new BehaviorSubject<any>(null);
   currentUser$: Observable<any> = this.currentUserSubject.asObservable();
+
   setCurrentUser(user: any) {
     this.currentUserSubject.next(user);
+  }
+
+  checkAuth(){
+      this.http.get(this.authTokenUrl, this.httpOptions).subscribe(user => {
+        if(user) this.setCurrentUser(user);
+      });
   }
 
   login(username: string, password: string) {
     // Concatenate the password and the salt and hash the resulting string using SHA-256
     // const saltedPassword = password = password + this.salt;
     const hashedPassword = sha256(password);
-    console.log('login pass ', password)
-    console.log('login hashed ', hashedPassword)
 
     // Call the backend API to authenticate the user
-    this.http.post<User>(`${this.authURL}/login`, { username, password: hashedPassword }).subscribe(user => {
+    this.http.post<User>(`${this.authURL}/login`, { username, password: hashedPassword }).pipe(
+      tap(user => {
+        if (user && user.token) {
+          localStorage.setItem('jwt', user.token)          
+        }
+      })
+    ).subscribe(user => {
       this.setCurrentUser(user);
-      console.log('good job!  ', this.currentUser)
     });
   }
 
@@ -69,7 +91,10 @@ export class AuthService {
     // Call the backend API to log out the user
 
     // this.http.post('/api/logout', {}).subscribe(() => {
+      console.log('this.currentUser beforre', this.currentUser)
       this.setCurrentUser(null);
+      localStorage.setItem('jwt', '')
+      console.log('this.currentUser after', this.currentUser)
    // });
   }
 
@@ -79,7 +104,6 @@ export class AuthService {
     user.hshPwd = hashedPassword;
     const url = `${this.authURL}`;
     const response = this.http.post<User>(url, user, this.httpOptions).subscribe(res => {
-      console.log(' auth service res ', res)
       const { firstName, lastName, email, isAdmin} = res
 
       this.currentUser = {
@@ -88,13 +112,12 @@ export class AuthService {
         email: email,
         isAdmin: isAdmin
       }
-      console.log(' this.currentUser , ', this.currentUser)
     })
     return response
   }
 
-  hasAccess(requiredLevel: AccessLevel) {
-    return this.currentUser && this.currentUser.accessLevel === requiredLevel;
+  isAdmin() {
+    return this.currentUser && this.currentUser.isAdmin;
   }
 }
 

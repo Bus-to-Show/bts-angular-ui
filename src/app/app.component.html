@@ -1,4 +1,4 @@
-<div *ngIf="!isUserLoggedIn; else loggedIn">
+<div *ngIf="!isUserAdmin; else loggedIn">
     <app-auth></app-auth>
 </div>
 <ng-template #loggedIn>
@@ -9,9 +9,15 @@
         <button mat-button *ngIf="false" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" routerLink="/events">
             Events
         </button>
-        <button mat-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/dashboard">
-            Dashboard
-        </button>
+        <div class="stack">
+            <button mat-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+                Log out
+            </button>
+            <button mat-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/dashboard">
+                Dashboard
+            </button>
+
+        </div>
     </mat-toolbar>
     <mat-drawer-container class="example-container" autosize>
         <mat-drawer #drawer class="example-sidenav" mode="side">

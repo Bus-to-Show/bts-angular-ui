@@ -10,7 +10,7 @@ import { AuthService, AccessLevel } from '../services/auth.service';
 export class AdminComponent implements OnInit {
 
   constructor(private authService: AuthService) {
-    if (!authService.hasAccess(AccessLevel.Admin)) {
+    if (!authService.isAdmin()) {
       // Redirect the user to the login page or display an error message
       console.log('user should not have access')
     } else {

@@ -33,8 +33,7 @@ export class AppRoutingModule {
     // check for authentication
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
       if(
-        true
-        //this.authService.isAuthenticated()
+        this.authService.isAdmin()
         ){
         return true;
       }

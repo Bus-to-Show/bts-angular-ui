@@ -11,6 +11,10 @@
       margin-right: 30px;
   }
 
+  .stack {
+    display: flex;
+  }
+
   mat-toolbar {
         border-bottom-style: solid;
         border-bottom-color: #ff420f;
@@ -20,6 +24,6 @@
         background: linear-gradient(white, #dee0f5);
         margin-right: -28px;
         margin-left: -28px;
-        width: 106%
+        width: 106%;
 
   }

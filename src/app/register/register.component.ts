@@ -47,10 +47,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log('register clicked')
     if (this.form.valid) {
-      console.log('form is valid, soo..... ', this.form)
-      
       const user = {
         firstName: this.firstName,
         lastName: this.lastName,

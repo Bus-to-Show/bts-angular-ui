@@ -28,10 +28,7 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    console.log('register clicked')
-    if (this.form.valid) {
-      console.log('form is valid, soo..... ', this.form)
-      
+    if (this.form.valid) {      
       const user = {
         email: this.email,
         hshPwd: this.password
@@ -44,12 +41,6 @@ export class LoginComponent implements OnInit {
     //   .subscribe((res: any)=> {
     //     console.log('authentication response is back!', res)
     //     this.router.navigate(['/detail/40300431']);
-
-    //   /*
-     
-     
-    
-    //     */
 
     //   })
     }
