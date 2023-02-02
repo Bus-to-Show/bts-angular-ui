@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { environment } from './../environments/environment';
 import { AuthService, User } from './services/auth.service';
 
@@ -16,13 +17,21 @@ export class AppComponent implements OnInit {
   currentUser!: User | null;
   isUserLoggedIn: boolean = false;
   isUserAdmin: boolean = false;
+  isVerifyRoute = false;
 
   constructor(
     private authService: AuthService,
+    private router: Router
     ) {
-
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isVerifyRoute = event.url.startsWith('/verify');
+        const token = event.url.substring(event.url.lastIndexOf('/') +1);
+        console.log('token is =========>  ',  token)
+        this.authService.verifyEmail(token);
+      }
+    });
   }
-
   ngOnInit(): void {
 
     this.authService.checkAuth()

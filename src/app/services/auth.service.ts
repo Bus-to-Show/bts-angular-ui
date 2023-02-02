@@ -48,6 +48,8 @@ export class AuthService {
   private apiURL = environment.API_URL;
   private authURL = `${this.apiURL}/users`
   private authTokenUrl= `${this.apiURL}/api/secure`
+  private verifyEmailUrl = `${this.apiURL}/users/confirm-email`
+
 
   constructor(
     private http: HttpClient,
@@ -91,7 +93,7 @@ export class AuthService {
     // Call the backend API to log out the user
 
     // this.http.post('/api/logout', {}).subscribe(() => {
-      console.log('this.currentUser beforre', this.currentUser)
+      console.log('this.currentUser before', this.currentUser)
       this.setCurrentUser(null);
       localStorage.setItem('jwt', '')
       console.log('this.currentUser after', this.currentUser)
@@ -114,6 +116,14 @@ export class AuthService {
       }
     })
     return response
+  }
+
+  verifyEmail(token: string):void {
+    console.log('verify path ', `${this.verifyEmailUrl}/${token}`)
+
+    this.http.get(`${this.verifyEmailUrl}/${token}`, this.httpOptions).subscribe(res => {
+      console.log('res after verifyEmail(token) =========> ', res)
+    });  
   }
 
   isAdmin() {
