@@ -28,9 +28,7 @@ export interface User {
   isWaiverSigned?: boolean;
   token?: string;
 
-
 }
-
 
 
 @Injectable({
@@ -64,6 +62,13 @@ export class AuthService {
 
   setCurrentUser(user: any) {
     this.currentUserSubject.next(user);
+  }
+
+  private componentToShowSubject = new BehaviorSubject<any>(null);
+  componentToShow$: Observable<any> = this.componentToShowSubject.asObservable();
+
+  setComponentToShow(component: any) {
+    this.componentToShowSubject.next(component);
   }
 
   checkAuth(){
@@ -105,17 +110,14 @@ export class AuthService {
     const hashedPassword = sha256(password);
     user.hshPwd = hashedPassword;
     const url = `${this.authURL}`;
-    const response = this.http.post<User>(url, user, this.httpOptions).subscribe(res => {
-      const { firstName, lastName, email, isAdmin} = res
+    return this.http.post<User>(url, user, this.httpOptions)
+    // .subscribe((res: any) => {
+    //   console.log('register response ', res)
+    //   if (res.message === 'account already exists'){
 
-      this.currentUser = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        isAdmin: isAdmin
-      }
-    })
-    return response
+    //   }
+    // })
+
   }
 
   verifyEmail(token: string):void {

@@ -41,6 +41,7 @@ import { AdminComponent } from './admin/admin.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './login/login.component';
+import { RegistrationResponseComponent } from './registration-response/registration-response.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { LoginComponent } from './login/login.component';
     AdminComponent,
     RegisterComponent,
     AuthComponent,
-    LoginComponent
+    LoginComponent,
+    RegistrationResponseComponent
   ],
   imports: [
     BrowserModule,

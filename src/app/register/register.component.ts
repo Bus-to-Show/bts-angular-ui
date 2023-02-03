@@ -10,8 +10,10 @@ import { AuthService, User } from '../services/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
+
 export class RegisterComponent implements OnInit {
   form: FormGroup;
+
 
   get firstName() { return this.form.value.firstName; }
   get lastName() { return this.form.value.lastName; }
@@ -57,7 +59,21 @@ export class RegisterComponent implements OnInit {
       
       // Perform registration logic here, such as calling a REST API to create the user account
       // If the registration is successful, navigate to the login page
-      this.authenticationService.register(user)
+      this.authenticationService.register(user).subscribe((res:any) => {
+        console.log('res.code ', res.code)
+        if(res.code === '202'){
+          //user email already in database
+          this.authenticationService.setComponentToShow('exists')
+        } else if (res.code === 203) {
+          //token has expired
+          this.authenticationService.setComponentToShow('invalid')
+        } else if (res.code === 200) {
+          //successfullu registered
+          this.authenticationService.setComponentToShow('checkEmail')
+        } 
+        this.form.reset()
+      })
+      
       
     //   .subscribe((res: any)=> {
     //     console.log('authentication response is back!', res)
