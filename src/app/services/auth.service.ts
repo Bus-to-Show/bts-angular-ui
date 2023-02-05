@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { sha256 } from 'js-sha256';
 import { environment } from '../../environments/environment'
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { ThisReceiver } from '@angular/compiler';
 
 
 export enum AccessLevel {
@@ -111,21 +110,12 @@ export class AuthService {
     user.hshPwd = hashedPassword;
     const url = `${this.authURL}`;
     return this.http.post<User>(url, user, this.httpOptions)
-    // .subscribe((res: any) => {
-    //   console.log('register response ', res)
-    //   if (res.message === 'account already exists'){
-
-    //   }
-    // })
-
   }
 
-  verifyEmail(token: string):void {
+  verifyEmail(token: string) {
     console.log('verify path ', `${this.verifyEmailUrl}/${token}`)
 
-    this.http.get(`${this.verifyEmailUrl}/${token}`, this.httpOptions).subscribe(res => {
-      console.log('res after verifyEmail(token) =========> ', res)
-    });  
+    return this.http.get(`${this.verifyEmailUrl}/${token}`, this.httpOptions)
   }
 
   isAdmin() {

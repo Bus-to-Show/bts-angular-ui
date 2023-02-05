@@ -3,9 +3,6 @@ import { NavigationEnd, Router } from '@angular/router';
 import { environment } from './../environments/environment';
 import { AuthService, User } from './services/auth.service';
 
-
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -28,7 +25,15 @@ export class AppComponent implements OnInit {
         this.isVerifyRoute = event.url.startsWith('/verify');
         const token = event.url.substring(event.url.lastIndexOf('/') +1);
         console.log('token is =========>  ',  token)
-        this.authService.verifyEmail(token);
+        this.authService.verifyEmail(token).subscribe((res:any) => {
+          console.log('res after verifyEmail(token) =========> ', res)
+          if (res.code === '200 ') {
+            this.authService.setComponentToShow('emailConfirmed')
+    
+          } else {
+            this.authService.setComponentToShow('invalid')
+          }
+        });  
       }
     });
   }
