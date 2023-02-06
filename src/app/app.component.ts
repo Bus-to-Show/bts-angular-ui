@@ -20,26 +20,27 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private router: Router
     ) {
+  }
+  ngOnInit(): void {
+    this.authService.authorizeAPI()
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isVerifyRoute = event.url.startsWith('/verify');
-        const token = event.url.substring(event.url.lastIndexOf('/') +1);
-        console.log('token is =========>  ',  token)
-        this.authService.verifyEmail(token).subscribe((res:any) => {
-          console.log('res after verifyEmail(token) =========> ', res)
-          if (res.code === '200 ') {
-            this.authService.setComponentToShow('emailConfirmed')
-    
-          } else {
-            this.authService.setComponentToShow('invalid')
-          }
-        });  
+        if(this.isVerifyRoute){
+          const token = event.url.substring(event.url.lastIndexOf('/') +1);
+          this.authService.verifyEmail(token).subscribe((res:any) => {
+            if (res.code === '200') {
+              this.authService.setComponentToShow('emailConfirmed')
+            } else {
+              this.authService.setComponentToShow('invalid')
+            }
+          });  
+        } else {
+          this.authService.checkAuth()
+        }
       }
     });
-  }
-  ngOnInit(): void {
-
-    this.authService.checkAuth()
+        
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
       this.isUserLoggedIn = !!user;

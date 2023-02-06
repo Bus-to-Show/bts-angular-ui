@@ -9,17 +9,24 @@
         Success! We sent a confirmation email to your address. Please follow the link to verify your address and activate your account.
     </div>
 
+
 </div>
 <ng-template #showForms>
-    <h1>
-        Sign in or up!
-    </h1> 
-    <mat-tab-group>
-        <mat-tab label="Login">
-            <app-login></app-login>
-        </mat-tab>
-        <mat-tab label="Register">
-          <app-register></app-register>
-        </mat-tab>
-    </mat-tab-group>
+    <div *ngIf="componentToShow === 'emailConfirmed'; else showForms2">
+        Success! Your account has been verified. You may now log in!
+    </div>
+    <ng-template #showForms2>
+        <h1>
+            Sign in or up!
+        </h1> 
+        <mat-tab-group>
+            <mat-tab label="Login">
+                <app-login></app-login>
+            </mat-tab>
+            <mat-tab label="Register">
+              <app-register></app-register>
+            </mat-tab>
+        </mat-tab-group>
+    </ng-template>
+
 </ng-template>

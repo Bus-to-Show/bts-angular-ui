@@ -40,8 +40,10 @@ export class AuthService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-    })
+    }),
+    withCredentials: true
   };
+ 
   private apiURL = environment.API_URL;
   private authURL = `${this.apiURL}/users`
   private authTokenUrl= `${this.apiURL}/api/secure`
@@ -69,13 +71,22 @@ export class AuthService {
   setComponentToShow(component: any) {
     this.componentToShowSubject.next(component);
   }
-
+  
   checkAuth(){
-      this.http.get(this.authTokenUrl, this.httpOptions).subscribe(user => {
-        if(user) this.setCurrentUser(user);
-      });
+    this.http.get(this.authTokenUrl, this.httpOptions).subscribe(user => {
+      if(user) this.setCurrentUser(user);
+    });
   }
-
+  
+  authorizeAPI(){
+    this.http.get(`${this.apiURL}/api`, this.httpOptions).subscribe((token:any) => {
+      console.log('token =====> ', token)
+      if(token){
+        document.cookie = `token=${token}`
+      }
+    });
+  }
+  
   login(username: string, password: string) {
     // Concatenate the password and the salt and hash the resulting string using SHA-256
     // const saltedPassword = password = password + this.salt;
