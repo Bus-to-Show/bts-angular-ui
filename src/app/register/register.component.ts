@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
           //successfully registered
           this.authenticationService.setComponentToShow('checkEmail')
         } 
-        //this.form.reset()
+        this.form.reset()
       })
       
       

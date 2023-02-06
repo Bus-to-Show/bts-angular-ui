@@ -31,6 +31,8 @@ export class AppComponent implements OnInit {
           this.authService.verifyEmail(token).subscribe((res:any) => {
             if (res.code === '200') {
               this.authService.setComponentToShow('emailConfirmed')
+              this.isVerifyRoute = false;
+              this.router.navigate(['/dashboard'])
             } else {
               this.authService.setComponentToShow('invalid')
             }
@@ -40,7 +42,7 @@ export class AppComponent implements OnInit {
         }
       }
     });
-        
+
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
       this.isUserLoggedIn = !!user;

@@ -13,15 +13,27 @@
 </div>
 <ng-template #showForms>
     <div *ngIf="componentToShow === 'emailConfirmed'; else showForms2">
-        Success! Your account has been verified. You may now log in!
+        <mat-card>
+            <div class="message">
+                Your account has been verified. You may now log in!
+            </div>
+            <button mat-raised-button color="primary" (click)="showLoginScreen()">Ok!</button>
+
+        </mat-card>
+        
     </div>
     <ng-template #showForms2>
         <h1>
             Sign in or up!
         </h1> 
         <mat-tab-group>
-            <mat-tab label="Login">
-                <app-login></app-login>
+            <mat-tab label="{{loginOrReset}}">
+                <div *ngIf="loginOrReset==='Login'; else reset">
+                    <app-login></app-login>
+                </div>
+                <ng-template #reset>
+                    <app-reset-password></app-reset-password>
+                </ng-template>
             </mat-tab>
             <mat-tab label="Register">
               <app-register></app-register>

@@ -42,6 +42,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationResponseComponent } from './registration-response/registration-response.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { RegistrationResponseComponent } from './registration-response/registrat
     RegisterComponent,
     AuthComponent,
     LoginComponent,
-    RegistrationResponseComponent
+    RegistrationResponseComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

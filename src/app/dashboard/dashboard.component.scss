@@ -1,6 +1,7 @@
 /* DashboardComponent's private CSS styles */
 .mega {
-  color: #ff420f
+  color: #ff420f;
+  padding: 16px;
 }
 h2 {
     text-align: center;
@@ -81,4 +82,5 @@ h2 {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  padding: 16px;
 }

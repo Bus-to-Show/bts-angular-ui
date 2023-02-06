@@ -80,11 +80,17 @@ export class AuthService {
   
   authorizeAPI(){
     this.http.get(`${this.apiURL}/api`, this.httpOptions).subscribe((token:any) => {
-      console.log('token =====> ', token)
       if(token){
         document.cookie = `token=${token}`
       }
     });
+  }
+
+  private loginOrResetSubject = new BehaviorSubject<any>(null);
+  loginOrReset$: Observable<any> = this.loginOrResetSubject.asObservable();
+
+  setLoginOrReset(component: any) {
+    this.loginOrResetSubject.next(component);
   }
   
   login(username: string, password: string) {
@@ -102,6 +108,11 @@ export class AuthService {
     ).subscribe(user => {
       this.setCurrentUser(user);
     });
+  }
+
+  sendPasswordResetEmail(username: string) {
+    const url = `${this.authURL}/send-reset`;
+    return this.http.post<User>(url, {username}, this.httpOptions)
   }
 
   logout() {

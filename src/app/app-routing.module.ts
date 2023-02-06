@@ -39,7 +39,7 @@ export class AppRoutingModule {
         ){
         return true;
       }
-      this.router.navigate(['/login']);
+      this.router.navigate(['/dashboard']);
       return false;
     }
 }
