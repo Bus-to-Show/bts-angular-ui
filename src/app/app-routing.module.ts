@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'verify/:token', component: AppComponent },
+  { path: 'reset/:token', component: AppComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'events', component: EventsComponent },
   { path: 'detail/:id', component: EventDetailComponent},

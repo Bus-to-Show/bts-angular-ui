@@ -1,5 +1,11 @@
 <div *ngIf="!isUserAdmin; else loggedIn">
-    <app-auth></app-auth>
+    <div *ngIf="isResetRoute; else normal">
+        hi
+        <app-reset-pass-form [token]="token"></app-reset-pass-form>
+    </div>
+    <ng-template #normal>
+        <app-auth></app-auth>
+    </ng-template>
 </div>
 <ng-template #loggedIn>
     <mat-toolbar>

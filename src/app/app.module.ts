@@ -43,6 +43,8 @@ import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationResponseComponent } from './registration-response/registration-response.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetPassFormComponent } from './reset-pass-form/reset-pass-form.component';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AuthComponent,
     LoginComponent,
     RegistrationResponseComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ResetPassFormComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +96,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     MatSlideToggleModule
 
   ],
-  providers: [],
+  providers: [ { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

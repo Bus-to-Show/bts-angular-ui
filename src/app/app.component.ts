@@ -15,7 +15,8 @@ export class AppComponent implements OnInit {
   isUserLoggedIn: boolean = false;
   isUserAdmin: boolean = false;
   isVerifyRoute = false;
-
+  isResetRoute = false;
+  token: string = ''
   constructor(
     private authService: AuthService,
     private router: Router
@@ -26,17 +27,20 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isVerifyRoute = event.url.startsWith('/verify');
-        if(this.isVerifyRoute){
-          const token = event.url.substring(event.url.lastIndexOf('/') +1);
-          this.authService.verifyEmail(token).subscribe((res:any) => {
-            if (res.code === '200') {
-              this.authService.setComponentToShow('emailConfirmed')
-              this.isVerifyRoute = false;
-              this.router.navigate(['/dashboard'])
-            } else {
-              this.authService.setComponentToShow('invalid')
-            }
-          });  
+        this.isResetRoute = event.url.startsWith('/reset');
+        if(this.isVerifyRoute || this.isResetRoute){
+          this.token = event.url.substring(event.url.lastIndexOf('/') +1);
+          if (this.isVerifyRoute) {
+            this.authService.verifyEmail(this.token, 'verify').subscribe((res:any) => {
+              if (res.code === '200') {
+                this.authService.setComponentToShow('emailConfirmed')
+                this.isVerifyRoute = false;
+                this.router.navigate(['/dashboard'])
+              } else {
+                this.authService.setComponentToShow('invalid')
+              }
+            });  
+          }
         } else {
           this.authService.checkAuth()
         }

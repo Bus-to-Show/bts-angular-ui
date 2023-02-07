@@ -74,18 +74,6 @@ export class RegisterComponent implements OnInit {
         this.form.reset()
       })
       
-      
-    //   .subscribe((res: any)=> {
-    //     console.log('authentication response is back!', res)
-    //     this.router.navigate(['/detail/40300431']);
-
-    //   /*
-     
-     
-    
-    //     */
-
-    //   })
     }
   }
 }

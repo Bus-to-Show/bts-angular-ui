@@ -134,10 +134,9 @@ export class AuthService {
     return this.http.post<User>(url, user, this.httpOptions)
   }
 
-  verifyEmail(token: string) {
-    console.log('verify path ', `${this.verifyEmailUrl}/${token}`)
-
-    return this.http.get(`${this.verifyEmailUrl}/${token}`, this.httpOptions)
+  verifyEmail(token: string, verifyOrReset: 'verify'| 'reset') {
+    if (verifyOrReset === 'verify') return this.http.get(`${this.verifyEmailUrl}/${token}`, this.httpOptions);
+    else return this.http.get(`${this.verifyEmailUrl}/${token}`, this.httpOptions);
   }
 
   isAdmin() {
