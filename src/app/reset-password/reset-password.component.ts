@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-reset-password',
@@ -10,10 +12,13 @@ import { AuthService } from '../services/auth.service';
 export class ResetPasswordComponent implements OnInit {
   
   form!: FormGroup;
+  resetRequested: boolean = false;
+  resetResponse: 'email sent' |'no such' | 'try again' | 'unsent' = 'unsent';
 
   constructor(
     private authenticationService: AuthService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private _snackBar: MatSnackBar
     ) {
     }
     
@@ -28,16 +33,33 @@ export class ResetPasswordComponent implements OnInit {
   }
   get email() { return this.form.value.email; }
 
-
   sendPasswordResetEmail() {
     console.log('does this click even work??? ', this.email)
     if (this.form.valid) {      
       this.authenticationService.sendPasswordResetEmail(this.email).subscribe((response: any) => {
-        console.log('reset password response ------> ', response)
+        this.resetRequested = true
+        this.form.reset()
+        this.openSnackBar(response.code, 'close')
+        console.log('reset response ====> ', response, 'and resetResponse ====> ', this.resetResponse)
       })
     }
   }
-
+ 
+  openSnackBar(code: string, action: string) {
+    let messageToDisplay: string = ''
+    if (code === '200'){
+      messageToDisplay = 'Reset Email Sent. Please check your email.';
+    } else if (code === '202') {
+      messageToDisplay = `I didn't find an account matching that email address. Please try again or register a new account.`
+    } else {
+      messageToDisplay = 'try again';
+    }
+    this._snackBar.open(messageToDisplay, action, {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
+  
   showLoginInstead() {
     this.authenticationService.setLoginOrReset('Login');
   }
