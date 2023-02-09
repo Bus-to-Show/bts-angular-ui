@@ -1,6 +1,5 @@
 <div *ngIf="!isUserAdmin; else loggedIn">
     <div *ngIf="isResetRoute; else normal">
-        hi
         <app-reset-pass-form [token]="token"></app-reset-pass-form>
     </div>
     <ng-template #normal>

@@ -45,9 +45,10 @@ export class AuthService {
   };
  
   private apiURL = environment.API_URL;
-  private authURL = `${this.apiURL}/users`
-  private authTokenUrl= `${this.apiURL}/api/secure`
-  private verifyEmailUrl = `${this.apiURL}/users/confirm-email`
+  private authURL = `${this.apiURL}/users`;
+  private authTokenUrl= `${this.apiURL}/api/secure`;
+  private verifyEmailUrl = `${this.apiURL}/users/confirm-email`;
+  private resetEmailUrl = `${this.apiURL}/users/reset-pass`;
 
 
   constructor(
@@ -134,8 +135,15 @@ export class AuthService {
     return this.http.post<User>(url, user, this.httpOptions)
   }
 
-  verifyEmail(token: string, verifyOrReset: 'verify'| 'reset') {
-    if (verifyOrReset === 'verify') return this.http.get(`${this.verifyEmailUrl}/${token}`, this.httpOptions);
+  verifyEmail(token: string, user?:any) {
+    if (user){  
+      const password = user.hshPwd;
+      const hashedPassword = sha256(password);
+      console.log('inside verifyEmail func -------', token, user)
+    user.hshPwd = hashedPassword;
+    user.resetToken = token
+      return this.http.post(`${this.resetEmailUrl}`, user, this.httpOptions);
+    } 
     else return this.http.get(`${this.verifyEmailUrl}/${token}`, this.httpOptions);
   }
 

@@ -1,9 +1,11 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { userInfo } from 'os';
 import { AuthService, User } from '../services/auth.service';
+import { MatError } from '@angular/material/form-field';
+
 
 @Component({
   selector: 'app-register',
@@ -13,7 +15,21 @@ import { AuthService, User } from '../services/auth.service';
 
 export class RegisterComponent implements OnInit {
   form: FormGroup;
+  showConfirmPassError: boolean = false;
 
+  passwordValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      const specialChar = /[!@#$%^&*(),.?":{}|<>]/;
+      const hasSpecialChar = specialChar.test(control.value);
+      const hasCapitalLetter = /[A-Z]/.test(control.value);
+      const hasLowerCaseLetter = /[a-z]/.test(control.value);
+      const hasNumericalCharacter = /\d/.test(control.value);
+  
+      const isValid = hasSpecialChar || hasCapitalLetter || hasLowerCaseLetter || hasNumericalCharacter;
+      console.log('password constraints isValid ', isValid)
+      return isValid ? { 'password': true } : { 'password': false };
+    };
+  }
 
   get firstName() { return this.form.value.firstName; }
   get lastName() { return this.form.value.lastName; }
@@ -28,10 +44,10 @@ export class RegisterComponent implements OnInit {
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       confirmPassword: new FormControl('', Validators.required)
     }, 
-    //{ validators: this.checkPasswords }
+    { validators: this.checkPasswords }
     );
   }
   ngOnInit(): void {
@@ -40,13 +56,15 @@ export class RegisterComponent implements OnInit {
 
   //add logic to check for matching passwords
 
-  checkPasswords(form: FormGroup) {
-    
-    const password = this.password;
-    const confirmPassword = this.confirmPassword;
-
-    return password?.value === confirmPassword?.value ? null : { notSame: true };
-  }
+  checkPasswords: any = (form: FormGroup) => {
+    const password = form.get('password');
+    const confirmPassword = form.get('confirmPassword');
+    if(password && password.value && confirmPassword && confirmPassword.value){
+       this.showConfirmPassError = password.value !== confirmPassword.value
+    } else {
+      this.showConfirmPassError = false;
+    }
+  };
 
   register() {
     if (this.form.valid) {

@@ -13,7 +13,7 @@ export class ResetPasswordComponent implements OnInit {
   
   form!: FormGroup;
   resetRequested: boolean = false;
-  resetResponse: 'email sent' |'no such' | 'try again' | 'unsent' = 'unsent';
+  resetResponse: 'email sent' | 'no such' | 'try again' | 'unsent' = 'unsent';
 
   constructor(
     private authenticationService: AuthService,

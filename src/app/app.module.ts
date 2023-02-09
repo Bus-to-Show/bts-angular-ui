@@ -45,6 +45,8 @@ import { RegistrationResponseComponent } from './registration-response/registrat
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ResetPassFormComponent } from './reset-pass-form/reset-pass-form.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
@@ -93,7 +95,9 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     MatSnackBarModule,
     MatCheckboxModule,
     MatDialogModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatFormFieldModule
+    
 
   ],
   providers: [ { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
