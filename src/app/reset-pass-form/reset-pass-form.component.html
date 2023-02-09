@@ -1,0 +1,32 @@
+<p>reset-pass-form works!</p>
+<mat-card>
+    <form [formGroup]="form" (ngSubmit)="resetIt()">
+  
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email" type="email">
+      <mat-error *ngIf="email && email.invalid && (email.dirty || email.touched)">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Password" formControlName="password" type="password">
+      <mat-error *ngIf="password && password.invalid && (password.dirty || password.touched)">
+        Please enter a password
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Confirm Password" formControlName="confirmPassword" type="password">
+      <mat-error *ngIf="confirmPassword && confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+        Please confirm your password
+      </mat-error>
+      <div class="mat-error" *ngIf="showConfirmPassError">
+        Passwords do not match
+      </div>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || form.disabled || showConfirmPassError" >Submit New Password</button>
+  </form>
+</mat-card>
+  
