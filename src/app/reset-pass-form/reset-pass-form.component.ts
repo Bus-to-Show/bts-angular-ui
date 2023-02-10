@@ -5,8 +5,6 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from '../services/auth.service';
 
-
-
 @Component({
   selector: 'app-reset-pass-form',
   templateUrl: './reset-pass-form.component.html',
@@ -17,7 +15,8 @@ export class ResetPassFormComponent implements OnInit {
 
   form!: FormGroup;
   decodedEmail: any;
-  showConfirmPassError: boolean = false;
+  showPasswordsMismatchError: boolean = false;
+  showPasswordConstraintsError: boolean = false;
 
   get email() { return this.form.value.email; }
   get password() { return this.form.value.password; }
@@ -29,6 +28,7 @@ export class ResetPassFormComponent implements OnInit {
     private _snackBar: MatSnackBar
     ) {
   }
+
   ngOnInit(): void {
     this.decodedEmail = this.getDecodedEmailFromToken();
     this.form = new FormGroup({
@@ -38,7 +38,6 @@ export class ResetPassFormComponent implements OnInit {
     }, 
     { validators: this.checkPasswords }
     );
-    
   }
 
   public getDecodedEmailFromToken() {
@@ -48,14 +47,34 @@ export class ResetPassFormComponent implements OnInit {
 
   //add logic to check for matching passwords
 
+
+  passwordValidator(field: string): boolean {
+      const stringToTest = field
+      const longEnough = stringToTest && stringToTest.length >= 7;
+      const specialChar = /[!@#$%^&*(),.?":{}|<>]/;
+      const hasSpecialChar = specialChar.test(stringToTest);
+      const hasCapitalLetter = /[A-Z]/.test(stringToTest);
+      const hasLowerCaseLetter = /[a-z]/.test(stringToTest);
+      const hasNumericalCharacter = /\d/.test(stringToTest);
+
+      const isValid = longEnough && hasSpecialChar && hasCapitalLetter && hasLowerCaseLetter && hasNumericalCharacter;
+
+      return isValid ? true : false;
+  }
+
+  checkIfPasswordsMatch(form:FormGroup){
+    const password = form.get('password');
+    const confirmPassword = form.get('confirmPassword');
+    return password!.value === confirmPassword!.value ? true : false
+  }
+
+  //add logic to check for matching passwords
+
   checkPasswords: any = (form: FormGroup) => {
     const password = form.get('password');
     const confirmPassword = form.get('confirmPassword');
-    if(password && password.value && confirmPassword && confirmPassword.value){
-       this.showConfirmPassError = password.value !== confirmPassword.value
-    } else {
-      this.showConfirmPassError = false;
-    }
+    this.showPasswordConstraintsError =  ( password && password.value) && !this.passwordValidator(password.value) 
+    this.showPasswordsMismatchError = (password && password.value && confirmPassword && confirmPassword.value) && !this.checkIfPasswordsMatch(form)
   };
   
   

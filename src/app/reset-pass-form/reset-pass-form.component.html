@@ -10,22 +10,24 @@
   
     <mat-form-field>
       <input matInput placeholder="Password" formControlName="password" type="password">
-      <mat-error *ngIf="password && password.invalid && (password.dirty || password.touched)">
+      <div class="mat-error" *ngIf="password && password.invalid && (password.dirty || password.touched)">
         Please enter a password
-      </mat-error>
+      </div>
+      <div class="mat-error" *ngIf="showPasswordConstraintsError">Password must have at least contain at least 1 of each of the following: 8 total characters, a special character, a number, an uppercase and lowercase letter.</div>
+      
     </mat-form-field>
   
     <mat-form-field>
       <input matInput placeholder="Confirm Password" formControlName="confirmPassword" type="password">
-      <mat-error *ngIf="confirmPassword && confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+      <div *ngIf="confirmPassword && confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
         Please confirm your password
-      </mat-error>
-      <div class="mat-error" *ngIf="showConfirmPassError">
+      </div>
+      <div class="mat-error" *ngIf="showPasswordsMismatchError">
         Passwords do not match
       </div>
     </mat-form-field>
   
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || form.disabled || showConfirmPassError" >Submit New Password</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || form.disabled || showPasswordConstraintsError || showPasswordsMismatchError" >Submit New Password</button>
   </form>
 </mat-card>
   

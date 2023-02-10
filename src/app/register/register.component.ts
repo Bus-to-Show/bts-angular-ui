@@ -80,7 +80,6 @@ export class RegisterComponent implements OnInit {
       // Perform registration logic here, such as calling a REST API to create the user account
       // If the registration is successful, navigate to the login page
       this.authenticationService.register(user).subscribe((res:any) => {
-        console.log('res.code inside authService.register =========>>.>>. ', res.code)
         if(res.code === '202'){
           //user email already in database
           this.authenticationService.setComponentToShow('exists')

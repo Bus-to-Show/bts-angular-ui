@@ -128,8 +128,9 @@ export class AuthService {
     return this.http.post<User>(url, user, this.httpOptions)
   }
 
-  verifyEmail(token: string, user?:any) {
-    if (user){  
+  verifyEmail(token: string, context?:any) {
+    if (context !== 'verify'){  
+      const user = context
       const password = user.hshPwd;
       const hashedPassword = sha256(password);
 

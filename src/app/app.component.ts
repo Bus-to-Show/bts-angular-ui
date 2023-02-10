@@ -25,10 +25,12 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.authService.authorizeAPI()
     this.router.events.subscribe((event) => {
+
       if (event instanceof NavigationEnd) {
         this.isVerifyRoute = event.url.startsWith('/verify');
         this.isResetRoute = event.url.startsWith('/reset');
         if(this.isVerifyRoute || this.isResetRoute){
+
           this.token = event.url.substring(event.url.lastIndexOf('/') +1);
           if (this.isVerifyRoute) {
             this.authService.verifyEmail(this.token, 'verify').subscribe((res:any) => {
