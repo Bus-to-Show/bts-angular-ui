@@ -34,13 +34,11 @@ export class ResetPasswordComponent implements OnInit {
   get email() { return this.form.value.email; }
 
   sendPasswordResetEmail() {
-    console.log('does this click even work??? ', this.email)
     if (this.form.valid) {      
       this.authenticationService.sendPasswordResetEmail(this.email).subscribe((response: any) => {
         this.resetRequested = true
         this.form.reset()
         this.openSnackBar(response.code, 'close')
-        console.log('reset response ====> ', response, 'and resetResponse ====> ', this.resetResponse)
       })
     }
   }

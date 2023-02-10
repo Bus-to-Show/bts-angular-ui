@@ -96,8 +96,7 @@ export class AuthService {
   
   login(username: string, password: string) {
     // Concatenate the password and the salt and hash the resulting string using SHA-256
-    // const saltedPassword = password = password + this.salt;
-    const hashedPassword = sha256(password);
+    const hashedPassword = sha256(`${password}`)
 
     // Call the backend API to authenticate the user
     this.http.post<User>(`${this.authURL}/login`, { username, password: hashedPassword }).pipe(
@@ -133,6 +132,7 @@ export class AuthService {
     if (user){  
       const password = user.hshPwd;
       const hashedPassword = sha256(password);
+
     user.hshPwd = hashedPassword;
     user.resetToken = token
       return this.http.post(`${this.resetEmailUrl}`, user, this.httpOptions);

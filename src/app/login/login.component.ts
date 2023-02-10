@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/auth.service'
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthService,
-    private changeDetectorRef: ChangeDetectorRef
+  
     ) {
     }
     
@@ -25,15 +25,13 @@ export class LoginComponent implements OnInit {
     }, 
     //{ validators: this.checkPasswords }
     );
-    this.changeDetectorRef.detectChanges();
-
   }
   get email() { return this.form.value.email; }
   get password() { return this.form.value.password; }
 
 
   login() {
-    if (this.form.valid) {      
+    if (this.form.valid) {
       this.authenticationService.login(this.email, this.password)
     }
   }
