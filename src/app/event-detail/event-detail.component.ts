@@ -66,7 +66,6 @@ export class EventDetailComponent implements OnInit {
     if (this.event) {
       this.eventService.updateEvent(this.event)
         .subscribe((res) => {
-          console.log('save response::: ', res)
           //this.goBack()
         });
     }

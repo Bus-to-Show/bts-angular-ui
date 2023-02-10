@@ -1,12 +1,22 @@
 <div *ngIf="componentToShow === 'exists' || componentToShow === 'invalid' || componentToShow === 'checkEmail'; else showForms">
     <div *ngIf="componentToShow === 'exists' ">
-        This email is already associated with an account.  Please log in, or click here to have us send a reset email.
+        <div>
+            This email is already associated with an account.  
+        </div>
+        <button mat-raised-button color="primary" (click)="showLoginScreen()">Click here to go back to the login screen.</button>
+
     </div>
     <div *ngIf="componentToShow === 'invalid' ">
-        This token is either expired or invalid.  Please click here to have us send a new one to your email.
+        <div>
+            This token is either expired or invalid.  Please click here to have us send a new one to your email.
+        </div>
+        <button mat-raised-button color="primary" (click)="showLoginScreen()">Click here to go back to the login screen.!</button>
+
     </div>
     <div *ngIf="componentToShow === 'checkEmail' ">
         Success! We sent a confirmation email to your address. Please follow the link to verify your address and activate your account.
+        <button mat-raised-button color="primary" (click)="showLoginScreen()">Ok!</button>
+
     </div>
 
 

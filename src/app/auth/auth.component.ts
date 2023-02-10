@@ -16,12 +16,10 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
     this.authService.componentToShow$
     .subscribe(component => {
-      console.log('now what is the component to show??????  ', component)
       this.componentToShow = component;
     });
 
     this.authService.loginOrReset$.subscribe(component => {
-      console.log('login or reset observable subcription response ====> ', component)
       this.loginOrReset = component ? component : 'Login';
     })
   }

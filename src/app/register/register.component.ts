@@ -1,10 +1,9 @@
 
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { userInfo } from 'os';
-import { AuthService, User } from '../services/auth.service';
-import { MatError } from '@angular/material/form-field';
+import { AuthService } from '../services/auth.service';
+
 
 
 @Component({
@@ -15,20 +14,21 @@ import { MatError } from '@angular/material/form-field';
 
 export class RegisterComponent implements OnInit {
   form: FormGroup;
-  showConfirmPassError: boolean = false;
+  showPasswordsMismatchError: boolean = false;
+  showPasswordConstraintsError: boolean = false;
 
-  passwordValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } => {
+  passwordValidator(field: string): boolean {
+      const stringToTest = field
+      const longEnough = stringToTest && stringToTest.length >= 7;
       const specialChar = /[!@#$%^&*(),.?":{}|<>]/;
-      const hasSpecialChar = specialChar.test(control.value);
-      const hasCapitalLetter = /[A-Z]/.test(control.value);
-      const hasLowerCaseLetter = /[a-z]/.test(control.value);
-      const hasNumericalCharacter = /\d/.test(control.value);
-  
-      const isValid = hasSpecialChar || hasCapitalLetter || hasLowerCaseLetter || hasNumericalCharacter;
-      console.log('password constraints isValid ', isValid)
-      return isValid ? { 'password': true } : { 'password': false };
-    };
+      const hasSpecialChar = specialChar.test(stringToTest);
+      const hasCapitalLetter = /[A-Z]/.test(stringToTest);
+      const hasLowerCaseLetter = /[a-z]/.test(stringToTest);
+      const hasNumericalCharacter = /\d/.test(stringToTest);
+
+      const isValid = longEnough && hasSpecialChar && hasCapitalLetter && hasLowerCaseLetter && hasNumericalCharacter;
+
+      return isValid ? true : false;
   }
 
   get firstName() { return this.form.value.firstName; }
@@ -53,17 +53,19 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  checkIfPasswordsMatch(form:FormGroup){
+    const password = form.get('password');
+    const confirmPassword = form.get('confirmPassword');
+    return password!.value === confirmPassword!.value ? true : false
+  }
 
   //add logic to check for matching passwords
 
   checkPasswords: any = (form: FormGroup) => {
     const password = form.get('password');
     const confirmPassword = form.get('confirmPassword');
-    if(password && password.value && confirmPassword && confirmPassword.value){
-       this.showConfirmPassError = password.value !== confirmPassword.value
-    } else {
-      this.showConfirmPassError = false;
-    }
+    this.showPasswordConstraintsError =  ( password && password.value) && !this.passwordValidator(password.value) 
+    this.showPasswordsMismatchError = (password && password.value && confirmPassword && confirmPassword.value) && !this.checkIfPasswordsMatch(form)
   };
 
   register() {

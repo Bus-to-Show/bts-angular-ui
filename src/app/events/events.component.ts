@@ -33,7 +33,6 @@ export class EventsComponent implements OnInit {
     if (!event.headliner) { return; }
     this.eventService.addEvent(event as Event)
       .subscribe(event => {
-        console.log(' add subscription response::: ', event)
         this.events.push(event);
       });
   }

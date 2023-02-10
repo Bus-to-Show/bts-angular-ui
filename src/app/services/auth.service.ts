@@ -117,14 +117,8 @@ export class AuthService {
   }
 
   logout() {
-    // Call the backend API to log out the user
-
-    // this.http.post('/api/logout', {}).subscribe(() => {
-      console.log('this.currentUser before', this.currentUser)
       this.setCurrentUser(null);
       localStorage.setItem('jwt', '')
-      console.log('this.currentUser after', this.currentUser)
-   // });
   }
 
   register(user: any): any {
@@ -139,7 +133,6 @@ export class AuthService {
     if (user){  
       const password = user.hshPwd;
       const hashedPassword = sha256(password);
-      console.log('inside verifyEmail func -------', token, user)
     user.hshPwd = hashedPassword;
     user.resetToken = token
       return this.http.post(`${this.resetEmailUrl}`, user, this.httpOptions);
@@ -152,35 +145,3 @@ export class AuthService {
   }
 }
 
-
-
-//
-// This service has a method login that authenticates the user and stores the user's information in the currentUser property. It also has a logout method that clears the currentUser property and a hasAccess method that checks if the user has the required access level.
-
-/* 
-This implementation concatenates the password and the salt value and hashes the resulting string using SHA-256. This makes it more difficult for an attacker to crack the hashed password, even if they know the hashing algorithm and the salt value, because they would also need to guess the original password.
-Keep in mind that this is just one example of how you could add a salt to the password to increase security. There are other considerations to take into account, such as using a different hashing algorithm or generating a unique salt value for each user.
-*/
-
-
-// You can use the AuthService in your Angular components to protect routes or components that should only be accessible to certain users. For example:
-
-/*
-
-import { Component } from '@angular/core';
-import { AuthService, AccessLevel } from './auth.service';
-
-@Component({
-  selector: 'app-admin-component',
-  templateUrl: './admin.component.html',
-})
-export class AdminComponent {
-  constructor(private authService: AuthService) {
-    if (!authService.hasAccess(AccessLevel.Admin)) {
-      // Redirect the user to the login page or display an error message
-    }
-  }
-}
-
-
-*/

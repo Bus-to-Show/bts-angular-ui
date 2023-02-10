@@ -3,22 +3,22 @@
     <form [formGroup]="form" (ngSubmit)="register()">
     <mat-form-field>
       <input matInput placeholder="First Name" formControlName="firstName">
-      <mat-error *ngIf="firstName && firstName.invalid && (firstName.dirty || firstName.touched)">
+      <div *ngIf="firstName && firstName.invalid && (firstName.dirty || firstName.touched)">
         Please enter your first name
-      </mat-error>
+      </div>
     </mat-form-field>
     <mat-form-field>
         <input matInput placeholder="Last Name" formControlName="lastName">
-        <mat-error *ngIf="lastName && lastName.invalid && (lastName.dirty || lastName.touched)">
+        <div *ngIf="lastName && lastName.invalid && (lastName.dirty || lastName.touched)">
           Please enter your last name
-        </mat-error>
+        </div>
       </mat-form-field>
   
     <mat-form-field>
       <input matInput placeholder="Email" formControlName="email" type="email">
-      <mat-error *ngIf="email && email.invalid && (email.dirty || email.touched)">
+      <div *ngIf="email && email.invalid && (email.dirty || email.touched)">
         Please enter a valid email address
-      </mat-error>
+      </div>
     </mat-form-field>
   
     <mat-form-field>
@@ -27,21 +27,21 @@
         Please enter a password
       </div>
       <div class="mat-error" *ngIf="password.invalid && password.errors.minlength ">Password must be at least 8 characters long</div>
-      <mat-error class="mat-error" *ngIf="password.invalid && password.errors.password ">Password must contain 1 special character, 1 number, 1 uppercase and 1 lowercase letter.</mat-error>
+      <div class="mat-error" *ngIf="showPasswordConstraintsError">Password must have at least contain at least 1 of each of the following: 8 total characters, a special character, a number, an uppercase and lowercase letter.</div>
       
     </mat-form-field>
   
     <mat-form-field>
       <input matInput placeholder="Confirm Password" formControlName="confirmPassword" type="password">
-      <mat-error *ngIf="confirmPassword && confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+      <div *ngIf="confirmPassword && confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
         Please confirm your password
-      </mat-error>
-      <div class="mat-error" *ngIf="showConfirmPassError">
+      </div>
+      <div class="mat-error" *ngIf="showPasswordsMismatchError">
         Passwords do not match
       </div>
     </mat-form-field>
   
-    <button mat-raised-button color="primary" [disabled]="form.invalid || form.disabled || showConfirmPassError" type="submit">Register</button>
+    <button mat-raised-button color="primary" [disabled]="form.invalid || form.disabled || showPasswordConstraintsError || showPasswordsMismatchError" type="submit">Register</button>
   </form>
 </mat-card>
   

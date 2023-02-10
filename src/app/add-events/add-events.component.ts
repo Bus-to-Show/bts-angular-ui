@@ -25,7 +25,6 @@ export class AddEventsComponent implements OnInit {
 
     this.eventService.addEvent(event as Event)
       .subscribe(event => {
-        console.log(' add subscription response::: ', event)
 
         this.ngOnInit()
         
