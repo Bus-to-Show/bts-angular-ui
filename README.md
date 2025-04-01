@@ -1,27 +1,28 @@
-# BtsAngularUi
+# BTS Admin Site
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+Production URL: https://peaceful-oasis-58555.herokuapp.com/
 
-## Development server
+Heroku dashboard: https://dashboard.heroku.com/apps/peaceful-oasis-58555/
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Development
 
-## Code scaffolding
+### Prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* Node v16.20
+* npm v8.19
 
-## Build
+### Setup
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Install the dependencies with `npm install`
 
-## Running unit tests
+2. Build the dist files with `npm run build-dev`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3. Run the site with `npm start`
 
-## Running end-to-end tests
+3. Ensure the API is listening on http://localhost:3000/ and browse to
+   http://localhost:8080/
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+5. Log in with the following credentials:
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+   * Email: admin@bustoshow.org
+   * Password: Test123$
