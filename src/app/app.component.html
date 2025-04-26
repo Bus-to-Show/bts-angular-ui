@@ -1,43 +1,25 @@
 <div *ngIf="!isUserAdmin; else loggedIn">
-    <div *ngIf="isResetRoute; else normal">
-        <app-reset-pass-form [token]="token"></app-reset-pass-form>
-    </div>
-    <ng-template #normal>
-        <app-auth></app-auth>
-    </ng-template>
-</div>
-<ng-template #loggedIn>
-    <mat-toolbar>
-        <span class="example-spacer"></span>
-        <span>{{title}}</span>
-        <span class="example-spacer"></span>
-        <button mat-button *ngIf="false" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" routerLink="/events">
-            Events
-        </button>
-        <div class="stack">
-            <button mat-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
-                Log out
-            </button>
-            <button mat-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/dashboard">
-                Dashboard
-            </button>
+  <div *ngIf="isResetRoute; else normal">
+    <app-reset-pass-form [token]="token"></app-reset-pass-form>
+  </div>
 
-        </div>
-    </mat-toolbar>
-    <mat-drawer-container class="example-container" autosize>
-        <mat-drawer #drawer class="example-sidenav" mode="side">
-            <mat-nav-list>
-                <a mat-list-item href="#">Link 1</a>
-                <a mat-list-item href="#">Link 2</a>
-                <a mat-list-item href="#">Link 3</a>
-              </mat-nav-list>
-        </mat-drawer>
-    
-    
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <router-outlet></router-outlet>
-    
-    </mat-drawer-container>
+  <ng-template #normal>
+    <app-auth></app-auth>
+  </ng-template>
+</div>
+
+<ng-template #loggedIn>
+  <mat-toolbar>
+    <h1>{{title}}</h1>
+
+    <button mat-button (click)="logout()">
+      Log out
+    </button>
+
+    <button mat-button routerLink="/dashboard">
+      Dashboard
+    </button>
+  </mat-toolbar>
+
+  <router-outlet></router-outlet>
 </ng-template>

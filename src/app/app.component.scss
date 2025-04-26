@@ -1,29 +1,10 @@
-.example-spacer {
-    flex: 1 1 auto;
-  }
+h1 {
+  flex: 1;
+}
 
-  body{
-      margin:0;
-
-    }
-
-  button {
-      margin-right: 30px;
-  }
-
-  .stack {
-    display: flex;
-  }
-
-  mat-toolbar {
-        border-bottom-style: solid;
-        border-bottom-color: #ff420f;
-        color: #ff420f;
-        margin-bottom: 20px;
-        height: 80px;
-        background: linear-gradient(white, #dee0f5);
-        margin-right: -28px;
-        margin-left: -28px;
-        width: 106%;
-
-  }
+mat-toolbar {
+  background-image: linear-gradient(white, #dee0f5);
+  border-bottom: 2px solid #ff420f;
+  color: #ff420f;
+  margin-bottom: 2em;
+}
