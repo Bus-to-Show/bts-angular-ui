@@ -1,8 +1,6 @@
 # BTS Admin Site
 
-Production URL: https://peaceful-oasis-58555.herokuapp.com/
-
-Heroku dashboard: https://dashboard.heroku.com/apps/peaceful-oasis-58555/
+Production URL: https://bus-to-show.github.io/bts-angular-ui/
 
 ## Development
 
@@ -11,7 +9,7 @@ Heroku dashboard: https://dashboard.heroku.com/apps/peaceful-oasis-58555/
 * Node v16.20
 * npm v8.19
 
-### Setup
+### Setup/run
 
 1. Install the dependencies with `npm install`
 
@@ -19,8 +17,8 @@ Heroku dashboard: https://dashboard.heroku.com/apps/peaceful-oasis-58555/
 
 3. Run the site with `npm start`
 
-3. Ensure the API is listening on http://localhost:3000/ and browse to
-   http://localhost:8080/
+4. Ensure the API is listening on http://localhost:3000/ and browse to
+   http://localhost:8080/bts-angular-ui/
 
 5. Log in with the following credentials:
 
