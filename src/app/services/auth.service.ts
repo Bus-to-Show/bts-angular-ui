@@ -1,10 +1,8 @@
-//Here is an example of how you could implement user authentication with different access levels in an Angular application using TypeScript:
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { sha256 } from 'js-sha256';
 import { environment } from '../../environments/environment'
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-
 
 export enum AccessLevel {
   Admin = 'admin',
@@ -26,9 +24,7 @@ export interface User {
   isStaff?:boolean;
   isWaiverSigned?: boolean;
   token?: string;
-
 }
-
 
 @Injectable({
   providedIn: 'root'
@@ -39,11 +35,11 @@ export class AuthService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      'Authorization': 'jwt' in localStorage ? `Bearer ${localStorage.getItem('jwt')}` : ''
     }),
     withCredentials: true
   };
- 
+
   private apiURL = environment.API_URL;
   private authURL = `${this.apiURL}/users`;
   private authTokenUrl= `${this.apiURL}/api/secure`;
@@ -72,13 +68,13 @@ export class AuthService {
   setComponentToShow(component: any) {
     this.componentToShowSubject.next(component);
   }
-  
+
   checkAuth(){
     this.http.get(this.authTokenUrl, this.httpOptions).subscribe(user => {
       if(user) this.setCurrentUser(user);
     });
   }
-  
+
   authorizeAPI(){
     this.http.get(`${this.apiURL}/api`, this.httpOptions).subscribe((token:any) => {
       if(token){
@@ -93,7 +89,7 @@ export class AuthService {
   setLoginOrReset(component: any) {
     this.loginOrResetSubject.next(component);
   }
-  
+
   login(username: string, password: string) {
     // Concatenate the password and the salt and hash the resulting string using SHA-256
     const hashedPassword = sha256(`${password}`)
@@ -102,7 +98,7 @@ export class AuthService {
     this.http.post<User>(`${this.authURL}/login`, { username, password: hashedPassword }).pipe(
       tap(user => {
         if (user && user.token) {
-          localStorage.setItem('jwt', user.token)          
+          localStorage.setItem('jwt', user.token)
         }
       })
     ).subscribe(user => {
@@ -117,7 +113,7 @@ export class AuthService {
 
   logout() {
       this.setCurrentUser(null);
-      localStorage.setItem('jwt', '')
+      localStorage.removeItem('jwt')
   }
 
   register(user: any): any {
@@ -129,7 +125,7 @@ export class AuthService {
   }
 
   verifyEmail(token: string, context?:any) {
-    if (context !== 'verify'){  
+    if (context !== 'verify'){
       const user = context
       const password = user.hshPwd;
       const hashedPassword = sha256(password);
@@ -137,7 +133,7 @@ export class AuthService {
     user.hshPwd = hashedPassword;
     user.resetToken = token
       return this.http.post(`${this.resetEmailUrl}`, user, this.httpOptions);
-    } 
+    }
     else return this.http.get(`${this.verifyEmailUrl}/${token}`, this.httpOptions);
   }
 
