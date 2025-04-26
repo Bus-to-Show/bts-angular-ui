@@ -1,27 +1,29 @@
-<div>
-    <mat-card *ngIf="(parent==='check-in' && reservation.status != 3) || parent==='management'" class="reservation-container">
-        <div class="reservation-name">
-            <h3> {{reservation.willCallLastName}},</h3>
-        </div>
-        <div class="reservation-name">
-           <h3> {{reservation.willCallFirstName }}</h3>
-        </div> 
-        <mat-slide-toggle *ngIf="parent==='check-in'"
-            class="slider"
-            [checked]="reservation.status===2"
-            [disabled]="reservation.status==3"
-            (change)="updateReservationStatus($event)"
-            >
-            
-        </mat-slide-toggle>
-        <div>
-           STATUS:  {{reservation.status}}
-        </div>
-        <button *ngIf="parent=='management' && reservation.status !=3" mat-raised-button appearance="outline" (click)="onCancel('CANCEL')">
-            CANCEL
-        </button>
-        <button *ngIf="parent=='management' && reservation.status ==3" mat-raised-button appearance="outline" (click)="onCancel('UNCANCEL')">
-            CANCEL CANCEL (UNCANCEL)
-        </button>
-    </mat-card>
-</div>
+<mat-card *ngIf="(parent === 'check-in' && reservation.status !== 3) || parent === 'management'" class="reservation-container">
+  <div>
+    <div class="reservation-name">
+      {{reservation.willCallLastName}}, {{reservation.willCallFirstName}}
+    </div>
+
+    <div>
+      Status: {{reservation.status}}
+    </div>
+  </div>
+
+  <mat-slide-toggle *ngIf="parent === 'check-in'"
+    class="slider"
+    [checked]="reservation.status === 2"
+    [disabled]="reservation.status === 3"
+    (change)="updateReservationStatus($event)">
+    Check-in
+  </mat-slide-toggle>
+
+  <div *ngIf="parent === 'management'" class="reservation-controls">
+    <button *ngIf="reservation.status !== 3" mat-raised-button color="warn" (click)="cancel()">
+      Cancel
+    </button>
+
+    <button *ngIf="reservation.status === 3" mat-raised-button color="primary" (click)="uncancel()">
+      Uncancel
+    </button>
+  </div>
+</mat-card>

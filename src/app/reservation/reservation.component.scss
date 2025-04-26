@@ -1,19 +1,18 @@
 .reservation-container {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  margin: 1em;
+  padding: 1em;
 }
-.example-margin {
-    margin: 10px;
-  }
 
+.reservation-name {
+  font-weight: bold;
+}
 
-  .reservation-name {
-      margin: 10px
-  }
-
-  div {
-      margin-left: 10px;
-      margin-right: 10px;
-  }
+.reservation-controls {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
