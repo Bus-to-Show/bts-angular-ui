@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {ReservationsService} from '../services/reservations.service';
-import {Order} from '../types/order';
+import {Reservation} from '../types/reservation';
 
 @Component({
   selector: 'app-reservation',
@@ -8,7 +8,7 @@ import {Order} from '../types/order';
   styleUrls: ['./reservation.component.scss']
 })
 export class ReservationComponent {
-  @Input() reservation!: Order;
+  @Input() reservation!: Reservation;
   @Input() parent!: 'check-in' | 'management';
 
   constructor(
